@@ -1,5 +1,5 @@
 export class AuthService {
-    check(): boolean {
+    check() {
         return false;
     }
 }
