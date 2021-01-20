@@ -1,4 +1,4 @@
-# questionnaire_
+# questionnaire
 
 ## Project setup
 ```

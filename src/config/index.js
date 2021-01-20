@@ -1,0 +1,1 @@
+export { SSOConfig } from './sso.config';

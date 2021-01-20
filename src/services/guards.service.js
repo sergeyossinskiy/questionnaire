@@ -15,7 +15,7 @@ export class GuardsService {
 
                 if (index == (guards.length - 1)) next(_next);
             })
-            .catch(err => {});
+            .catch(err => { console.log(err) });
         }
     }
 }
