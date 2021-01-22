@@ -16,13 +16,9 @@ export default {
       this.$auth.attempt( this.$route.query );
     }
   },
-  mounted() {
-    //console.log( this.$route.query );
-  },
   methods: {
     open() {
-      this.$auth.openSSOLogin( this.$route );
-      //SSOService.openLogin(this.$route.query);
+      this.$auth.openSSOLogin();
     }
   }
 }

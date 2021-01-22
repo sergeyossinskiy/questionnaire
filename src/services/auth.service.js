@@ -39,13 +39,11 @@ export class AuthService {
     }
   
     openSSOLogin() {
-      //let params = this.defineParameters();
       this.sso.redirectToLogin();
     }
   
     openSSORegister() {
-      //let params = this.defineParameters();
       this.sso.redirectToRegister();
     }
-  }
+}
   

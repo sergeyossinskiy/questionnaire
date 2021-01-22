@@ -33,7 +33,7 @@ export class SSOService {
     //     });
     // }
 
-    redirectTo(pagename){
-        this.router.navigate(['/' + pagename]);
-    }
+    // redirectTo(pagename){
+    //     this.router.navigate(['/' + pagename]);
+    // }
 }
