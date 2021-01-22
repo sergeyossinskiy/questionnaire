@@ -1,9 +1,8 @@
 <template>
     <div class="control">
-        <Button icon="pi pi-user" class="p-button-raised p-button-rounded" @click="toggle"/>
-        <Menu ref="menu" :model="items" :popup="true" />
-
-        <LanguadeSwitcher/>    
+        <ProfileMenu />
+        <p>{{ $t('common.login') }}</p>
+        <LocaleSwitcher />    
     </div>
     
     <div class="app-title">
@@ -19,36 +18,19 @@
 </template>
 
 <script>
-import Menu from 'primevue/menu';
 import ScrollPanel from 'primevue/scrollpanel';
-import Button from 'primevue/button';
-import LanguadeSwitcher from './LanguadeSwitcher';
+import LocaleSwitcher from './LocaleSwitcher';
+import ProfileMenu from './ProfileMenu';
 
 export default {
     name: 'Sidebar',
     components: {
-        Menu,
         ScrollPanel,
-        Button,
-        LanguadeSwitcher
+        ProfileMenu,
+        LocaleSwitcher
     },
     data() {
-		return {
-			items: [
-				{
-					label: 'Войти',
-					command: () => {
-						this.$auth.openSSOLogin();
-					}
-				},
-				{
-                    label: 'Зарегистрироваться',
-                    command: () => {
-						this.$auth.openSSORegister();
-					}
-                }
-			]
-		}
+		return {}
 	},
     computed: {
         appName() {
@@ -56,13 +38,9 @@ export default {
         },
         appPartnerName() {
             return this.$store.getters.partner.short_name;
-        }
+        },
     },
-    methods: {
-        toggle(event) {
-            this.$refs.menu.toggle(event);
-        }
-    },
+    methods: {},
     async mounted() {
         if ( !Object.keys(this.$store.getters.partner).length ){
             await this.$store.dispatch('fetchPartner');

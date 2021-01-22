@@ -1,0 +1,12 @@
+{
+    "common" : {
+        "locales": {
+            "kz": "Қазақ",
+            "ru": "Русский",
+            "en": "English"
+        },
+        "login": "Кіру",
+        "register": "Тіркелу",
+        "logout": "Шығу"
+    }    
+}

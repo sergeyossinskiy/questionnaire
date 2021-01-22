@@ -5,6 +5,7 @@ export class SSOService {
     sso_service;
     sso_api;
     paramsService;
+    token;
 
     constructor(_paramsService) {
         this.sso_service = SSOConfig.service;
@@ -25,6 +26,18 @@ export class SSOService {
   
     redirectToRegister() {
         this.redirect( "/register");
+    }
+
+    logout(token) {
+        this.token = token;
+        console.log(this.$store);
+        // let options = this.httpOption.extend('sso-access-token', token);
+        
+        // this.http.get(this.sso_api + "/logout" , options ).subscribe({
+        //   next: (value) => {
+        //     console.log(value);
+        //   }
+        // });
     }
 
     // goToLoginPage(){

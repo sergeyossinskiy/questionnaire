@@ -1,7 +1,9 @@
 export class AuthService {
+    store;
     sso;
   
-    constructor(_sso) {
+    constructor(_store,_sso) {
+        this.store = _store || undefined;
         this.sso = _sso || undefined;
     }
   
@@ -9,6 +11,7 @@ export class AuthService {
   
       if (params['token'] != undefined){ 
         localStorage.setItem('sso-access-token', params['token'] );
+        this.store.dispatch('login');
 
         this.openDestination( params );
       }    
@@ -24,18 +27,19 @@ export class AuthService {
         router.push({ path: params['pathname'] });
     }
   
-    openSSOLogout() {
+    executeSSOLogout() {
       
-      if( this.cookie.check('sso-access-token') ){
-        this.sso.logout( 
-          this.cookie.get('sso-access-token')
-        );
-  
-        this.cookie.delete('sso-access-token');
-        if ( this.router.url != '/home'){
-          this.route_service.redirect('home');
-        }
-      }   
+        if ( this.check() ){
+            this.sso.logout( localStorage.getItem('sso-access-token') );
+
+            localStorage.removeItem('sso-access-token');
+            this.store.dispatch('logout');
+
+            let router = this.sso.paramsService.router;    
+            if (router.currentRoute.value.name !== 'Home') {
+                router.push({ path: '/home' });
+            }
+        } 
     }
   
     openSSOLogin() {

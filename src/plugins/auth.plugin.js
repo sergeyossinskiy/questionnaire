@@ -7,6 +7,7 @@ export default {
   install: (app, options) => {
     let properties = app.config.globalProperties;
     app.config.globalProperties.$auth = new AuthService(
+      properties.$store,
       new SSOService(
         new SSOParamsService( properties.$router )
       )
