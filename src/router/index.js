@@ -43,13 +43,28 @@ const router = createRouter({
   routes
 })
 
+
+
 router.beforeEach((to, from, next) => {
-  if (to.meta.guards) {
-    GuardsService.init(to, from, next);
-  }
-  else{
-    next();
-  }  
+
+    const spinner = document.querySelector('.p-progress-spinner-container');
+    if (to.name) {
+        spinner.style.display = 'block';
+    }
+
+    if (to.meta.guards) {
+        GuardsService.init(to, from, next);
+    }
+    else{
+        next();
+    } 
+})
+
+router.afterEach((to, from) => {
+    const spinner = document.querySelector('.p-progress-spinner-container');
+    if (to.name) {
+        spinner.style.display = 'none';
+    }
 })
 
 export default router

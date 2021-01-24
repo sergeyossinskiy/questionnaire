@@ -38,11 +38,12 @@ export default {
     methods: {
         storeLocale(event) {
             CookieUtility.set('lang', this.$i18n.locale);
-            //document.cookie = `lang=${this.$i18n.locale}`;
         }
     },
     mounted() {
-        this.$i18n.locale = CookieUtility.get('lang');
+        if ( CookieUtility.get('lang') !== undefined ) {
+            this.$i18n.locale = CookieUtility.get('lang');
+        }        
     }
 }
 </script>

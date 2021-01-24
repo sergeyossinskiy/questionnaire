@@ -5,5 +5,7 @@ export const locales = Object.keys(vocabulary);
 
 export const i18n = createI18n({
     locale: 'ru',
-    messages: vocabulary
+    fallbackLocale: 'ru',
+    messages: vocabulary,
+    inheritLocale: false,
 });

@@ -38,7 +38,7 @@ export default {
                 logout: {
                     label: this.$t('common.logout'),
                     command: () => {
-                        this.$auth.executeSSOLogout();
+                        this.$auth.logout();
 					}
                 }
             };

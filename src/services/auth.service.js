@@ -27,12 +27,11 @@ export class AuthService {
         router.push({ path: params['pathname'] });
     }
   
-    executeSSOLogout() {
+    logout() {
       
         if ( this.check() ){
-            this.sso.logout( localStorage.getItem('sso-access-token') );
+            //this.sso.logout( localStorage.getItem('sso-access-token') );
 
-            localStorage.removeItem('sso-access-token');
             this.store.dispatch('logout');
 
             let router = this.sso.paramsService.router;    

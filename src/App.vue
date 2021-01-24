@@ -1,10 +1,15 @@
 <template>
+    <div class="p-progress-spinner-container">
+        <ProgressSpinner />
+    </div>  
+
     <component :is="layout">
         <router-view/>
     </component>
 </template>
 
 <script>
+import ProgressSpinner from 'primevue/progressspinner';
 import { AppLayout, AuthLayout, ErrorLayout, EmptyLayout } from './layouts';
 
 export default {
@@ -14,7 +19,7 @@ export default {
         }
     },
     components: {
-        AppLayout, AuthLayout, ErrorLayout
+        ProgressSpinner, AppLayout, AuthLayout, ErrorLayout
     }
 }
 </script>
@@ -33,5 +38,21 @@ export default {
 
     h1{
         font-family: 'Ubuntu', sans-serif;
+    }
+
+    .p-progress-spinner-container {
+        position: absolute;  
+        display: none;
+        height: 100vh;
+        width: 100vw;  
+        background: #fff;
+        z-index: 9999;
+
+        .p-progress-spinner {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 </style>

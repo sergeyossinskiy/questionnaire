@@ -12,7 +12,7 @@ export default {
     Button
   },
   beforeCreate: function(){
-    if ( !this.$auth.check() ){      
+    if ( !this.$store.getters.isAuth ){      
       this.$auth.attempt( this.$route.query );
     }
   },

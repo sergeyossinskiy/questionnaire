@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { i18n } from './config/locale.config'
+import { i18n } from './config/locale.config';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
