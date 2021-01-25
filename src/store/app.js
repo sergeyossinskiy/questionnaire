@@ -1,19 +1,21 @@
+import { CookieUtility } from '../utilities/cookie.utility';
+
 export default{
     state: {
-        partner: {}
+        lang: CookieUtility.get('lang') || undefined
     },
     mutations: {
-        setPartner(state, data) {
-            state.partner = data;
+        setLang(state, data) {
+            state.lang = data;
         }
     },
     actions: {
-        async fetchPartner({dispatch, commit}) {
-            const partner = await means.university();
-            commit('setPartner', partner);
+        async changeLang({dispatch, commit}, locale) {
+            CookieUtility.set('lang', locale);
+            commit('setLang', locale);
         }
     },
     getters: {
-        partner: state => state.partner
+        lang: state => state.lang
     }
 }

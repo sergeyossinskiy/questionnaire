@@ -13,6 +13,18 @@ const routes = [
     component: () => import('../views/Home.vue') 
   },
   { 
+    path: '/login', 
+    name: 'Login', 
+    meta: { layout: 'auth' }, 
+    component: () => import('../views/auth/Login.vue') 
+  },
+  { 
+    path: '/section/:name_section',
+    name: 'Section',
+    meta: { layout: 'app' }, 
+    component: () => import('../views/Section.vue') 
+  },
+  { 
     path: '/profile', 
     name: 'Profile', 
     meta: { layout: 'app', guards: ['auth', 'ava'] }, 
@@ -23,12 +35,6 @@ const routes = [
     name: 'About', 
     meta: { layout: 'app' }, 
     component: () => import('../views/About.vue')
-  },
-  { 
-    path: '/login', 
-    name: 'Login', 
-    meta: { layout: 'auth' }, 
-    component: () => import('../views/auth/Login.vue') 
   },
   { 
     path: '/:pathMatch(.*)*', 
@@ -43,10 +49,7 @@ const router = createRouter({
   routes
 })
 
-
-
 router.beforeEach((to, from, next) => {
-
     const spinner = document.querySelector('.p-progress-spinner-container');
     if (to.name) {
         spinner.style.display = 'block';

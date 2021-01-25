@@ -7,6 +7,7 @@ import store from './store';
 import PrimeVue from 'primevue/config';
 import AuthPlugin from './plugins/auth.plugin';
 import ConfigPlugin from './plugins/config.plugin';
+import FiltersPlugin from './plugins/filters.plugin';
 import './means.api';
 
 createApp(App).use(store)
@@ -14,5 +15,6 @@ createApp(App).use(store)
                 .use(i18n)
                 .use(AuthPlugin)
                 .use(ConfigPlugin)
+                .use(FiltersPlugin)
                 .use(PrimeVue)
                 .mount('#app');

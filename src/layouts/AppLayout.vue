@@ -41,7 +41,7 @@ export default {
     }
 
     .content {        
-        background: #f6f9fb;
+        background: #fafafa;
         overflow: hidden;
         overflow-y: auto;
     }

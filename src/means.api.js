@@ -2,22 +2,27 @@ import axios from 'axios';
 //import VueAxios from 'vue-axios';
 
 export class MeansApi {
-    api = 'http://means.kgu.kz/api/';
+    api = 'http://means.kgu.kz/api';
     sso_api = 'http://means.kgu.kz/api/sso/services';
     sso_access_token;
+    http_options;
 
     constructor(_axios) {
         this.axios = _axios;
         this.sso_access_token = localStorage.getItem('sso-access-token');
+        this.http_options = { headers: { 'sso-access-token': this.sso_access_token } };
     }
 
     async university() {
-        return (await this.axios.get(this.api + 'management/university_for_partner')).data;
+        return (await this.axios.get(this.api + '/management/university_for_partner')).data;
     }
 
     async logout() {        
-        let options = { headers: { 'sso-access-token': this.sso_access_token } };
-        console.log( await this.axios.get(this.sso_api + "/logout", options) );
+        await this.axios.get(this.sso_api + "/logout", this.http_options);
+    }
+
+    async getSections() {        
+        return (await this.axios.get(this.api + "/questionnaire/sections")).data;
     }
 }  
 

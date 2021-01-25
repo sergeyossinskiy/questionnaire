@@ -1,5 +1,5 @@
 <template>
-  
+  <span> {{ this.$route.params.name_section }} </span>
   
 </template>
 

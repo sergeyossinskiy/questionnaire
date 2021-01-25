@@ -9,7 +9,6 @@ import Dropdown from 'primevue/dropdown';
 import Menu from 'primevue/menu';
 import Button from 'primevue/button';
 import { locales } from '@/config/locale.config';
-import { CookieUtility } from '@/utilities'; 
 
 export default {
     name: 'LocaleSwitcher',
@@ -37,12 +36,12 @@ export default {
     },
     methods: {
         storeLocale(event) {
-            CookieUtility.set('lang', this.$i18n.locale);
+            this.$store.dispatch('changeLang', this.$i18n.locale);
         }
     },
     mounted() {
-        if ( CookieUtility.get('lang') !== undefined ) {
-            this.$i18n.locale = CookieUtility.get('lang');
+        if ( this.$store.getters.lang !== undefined ) {
+            this.$i18n.locale = this.$store.getters.lang;
         }        
     }
 }
@@ -51,5 +50,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
+    .p-dropdown {
+        border: none;
+
+        &:focus {
+            box-shadow: none;
+            border: none;
+            outline: none;
+        }
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+        box-shadow: none;
+        border: none;
+        outline: none;
+    }   
 
 </style>
