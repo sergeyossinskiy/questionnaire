@@ -42,7 +42,10 @@ export default {
     mounted() {
         if ( this.$store.getters.lang !== undefined ) {
             this.$i18n.locale = this.$store.getters.lang;
-        }        
+        } 
+        else {
+            this.$store.dispatch('changeLang', this.$i18n.locale);
+        }      
     }
 }
 </script>

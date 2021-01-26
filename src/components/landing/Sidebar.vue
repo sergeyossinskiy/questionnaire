@@ -10,7 +10,7 @@
     </div>
     
     <ScrollPanel style="width: 100%; height: 200px">
-        <Listbox v-model="selectedSection" :options="sections" optionLabel="title" optionValue="name">
+        <Listbox v-model="selectedSection" :options="sections" optionLabel="title" optionValue="name" class="p-listbox">
             <template #option="slotProps">
                 <router-link
                     tag="li"
@@ -42,15 +42,14 @@ export default {
         Button
     },
     data() {
-		return {}
+		return {
+            selectedSection: this.$route.params.name_section
+        }
 	},
     computed: {
         ...mapGetters(['lang']),
         appName() {
             return this.$config.appName;
-        },
-        selectedSection() {
-            return this.$route.params.name_section;
         },
         sections() {
             return this.$store.getters.sections;
@@ -61,6 +60,7 @@ export default {
     },
     methods: {
         toHome (event){
+            this.selectedSection = undefined;
             this.$router.push({ name: "Home"});
         }
     },
@@ -93,6 +93,20 @@ export default {
     .p-listbox {
         border: none;
         padding: 0 2rem;
+    }
+
+    ::v-deep(.p-listbox) {
+        .p-listbox-item{
+            text-align: center;
+        }
+
+        .p-listbox-item.p-highlight {
+            border-radius: 20px;
+        }
+
+        .p-listbox-item:not(.p-highlight):not(.p-disabled):hover {
+            border-radius: 20px;
+        }
     }
 
 </style>

@@ -7,6 +7,11 @@
         },
         "login": "Login",
         "register": "Register",
-        "logout": "Logout"
-    }    
+        "logout": "Logout",
+        "updated": "Updated"
+    },
+    "section" : {
+        "take_test" : "Take the test",
+        "test_and_questions" : "List of tests and questionnaires"
+    }     
 }

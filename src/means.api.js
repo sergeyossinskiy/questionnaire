@@ -24,6 +24,10 @@ export class MeansApi {
     async getSections() {        
         return (await this.axios.get(this.api + "/questionnaire/sections")).data;
     }
+
+    async getWorksheetsForSection(section) {        
+        return (await this.axios.get(this.api + "/questionnaire/worksheets/" + section )).data;
+    }
 }  
 
 window.means = new MeansApi(axios);

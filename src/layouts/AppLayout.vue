@@ -1,9 +1,13 @@
 <template>
-    <div class="p-grid">
-        <div class="p-col-12 p-md-4 p-lg-3">
+    <div class="p-grid app-layout">
+        <div class="p-col-12 p-md-4 p-lg-3 sidebar">
             <Sidebar/>
         </div>
         <div class="p-col-12 p-md-8 p-lg-9 content">
+            <div class="progress-spinner-wrapp">
+                <ProgressSpinner />
+            </div>
+
             <router-view/>  
         </div>
     </div>
@@ -18,18 +22,20 @@
 
 <script>
 import Sidebar from "@/components/landing/Sidebar.vue";
+import ProgressSpinner from 'primevue/progressspinner';
 
 export default {
     name: "AppLayout",
     components: {
-        Sidebar
+        Sidebar,
+        ProgressSpinner
     }
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
-    div.p-grid {
+    div.app-layout {
         margin-right: 0 !important;
         margin-left: 0!important;
         margin-top: 0!important;
@@ -40,9 +46,30 @@ export default {
         }
     }
 
-    .content {        
+    .sidebar {
+        border-right: 1px solid #fafafa;
+    }
+
+    .content {  
+        position: relative;      
         background: #fafafa;
         overflow: hidden;
         overflow-y: auto;
+
+        .progress-spinner-wrapp {
+            position: absolute;  
+            display: none;
+            height: 100%;
+            width: 100%;  
+            background: #fff;
+            z-index: 9909;
+
+            .p-progress-spinner {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
     }
 </style>
