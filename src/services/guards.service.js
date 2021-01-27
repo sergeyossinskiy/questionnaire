@@ -18,4 +18,22 @@ export class GuardsService {
             .catch(err => { console.log(err) });
         }
     }
+
+    static async callChain(guards, to, from, next) {
+        let _next;
+
+        for (let index = 0; index < guards.length; index++) {
+            let item = guards[index];
+            import('../guards/' + item + '.guard.js')
+            .then(module => {                
+                let guard = new module.default();
+                if (guard.canEnter(to) !== undefined ) {
+                    _next = guard.canEnter(to, from);
+                }
+
+                if (index == (guards.length - 1)) next(_next || to);
+            })
+            .catch(err => { console.log(err) });
+        }
+    }
 }

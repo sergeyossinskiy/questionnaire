@@ -25,6 +25,12 @@ const routes = [
     component: () => import('../views/Section.vue') 
   },
   { 
+    path: '/worksheet/:id_worksheet',
+    name: 'Worksheet',
+    meta: { layout: 'app' }, 
+    component: () => import('../views/Worksheet.vue') 
+  },
+  { 
     path: '/profile', 
     name: 'Profile', 
     meta: { layout: 'app', guards: ['auth', 'ava'] }, 

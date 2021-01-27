@@ -22,7 +22,7 @@
                             <div class="p-col-12"><i class="secondary-text">{{ $t(`common.updated`) }}: {{ $filters.date( slotProps.data.updated_at ) }}</i></div>
                         </div>
                     </div>
-                    <Button>{{ $t('section.take_test') }}</Button>
+                    <Button @click="openWorksheet(slotProps.data)">{{ $t('section.take_test') }}</Button>
                 </div>
             </div>
         </template>
@@ -49,10 +49,11 @@ import Dropdown from 'primevue/dropdown';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions';
 import Panel from 'primevue/panel';
 import Button from 'primevue/button';
+import { GuardsService } from '../services';
 import { mapGetters } from 'vuex';
 
 export default {
-    name: "Home",
+    name: "Section",
     components: {
         DataView,
         DataViewLayoutOptions,
@@ -71,7 +72,6 @@ export default {
             return this.$route.params.name_section;
         },
         worksheets() {
-            let worksheets = [];
             if ( !this.$store.getters.worksheets[this.current_section] ) {
                 let spinner = document.querySelector('.progress-spinner-wrapp');
                 if (spinner) spinner.style.display = 'block';
@@ -85,7 +85,19 @@ export default {
         }
     },
     methods: {
-        
+        openWorksheet(worksheet) {
+            let guards = this.$store.getters.requirements[this.current_section];
+            guards = guards.filter((el) => {
+                return el.worksheet_id == worksheet.id
+            });
+
+            guards = guards.map((el) => {
+                return el = el.name;
+            });
+            let to = { path: `/worksheet/${worksheet.id}`,name: "Worksheet", params: { "id_worksheet": worksheet.id} };
+            GuardsService.callChain(guards, to, this.$route, this.$router.push);
+            //this.$router.push( { name: "Worksheet", params: { "id_worksheet": worksheet.id} } );
+        }
     },
     async mounted() {
         if ( !this.$store.getters.worksheets[this.current_section] ) {

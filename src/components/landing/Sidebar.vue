@@ -14,7 +14,6 @@
             <template #option="slotProps">
                 <router-link
                     tag="li"
-                    active-class="active"
                     :to="'/section/' + slotProps.option.name"
                 >
                     <span>{{ $filters.translate( slotProps.option.title, lang )  }}</span>
@@ -96,8 +95,14 @@ export default {
     }
 
     ::v-deep(.p-listbox) {
-        .p-listbox-item{
+        li.p-listbox-item{
             text-align: center;
+            padding: 0 !important;
+
+            a {
+                display: block;
+                padding: 0.5rem 1rem;
+            }
         }
 
         .p-listbox-item.p-highlight {

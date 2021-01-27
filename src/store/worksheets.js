@@ -1,10 +1,12 @@
 export default{
     state: {
-        worksheets: {}
+        worksheets: {},
+        requirements: {}
     },
     mutations: {
         setWorksheetForSection(state, { section, worksheets }) {
-            state.worksheets[section] = worksheets;
+            state.worksheets[section] = worksheets.list;
+            state.requirements[section] = worksheets.requirements;
         }
     },
     actions: {
@@ -14,6 +16,7 @@ export default{
         }
     },
     getters: {
-        worksheets: state => state.worksheets
+        worksheets: state => state.worksheets,
+        requirements: state => state.requirements
     }
 }

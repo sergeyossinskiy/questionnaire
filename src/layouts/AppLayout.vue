@@ -47,7 +47,7 @@ export default {
     }
 
     .sidebar {
-        border-right: 1px solid #fafafa;
+        border-right: 1px solid #f5f5f5;
     }
 
     .content {  
