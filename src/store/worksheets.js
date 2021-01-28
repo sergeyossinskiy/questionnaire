@@ -1,22 +1,23 @@
 export default{
     state: {
-        worksheets: {},
-        requirements: {}
+        worksheet: {}
     },
     mutations: {
-        setWorksheetForSection(state, { section, worksheets }) {
-            state.worksheets[section] = worksheets.list;
-            state.requirements[section] = worksheets.requirements;
+        setWorksheet(state, { worksheet_data }) {
+            state.worksheet = worksheet_data;
         }
     },
     actions: {
-        async fetchWorksheetForSection({dispatch, commit}, section) {
-            const worksheets = await means.getWorksheetsForSection(section);
-            commit('setWorksheetForSection', { section, worksheets });
+        async fetchWorksheet({dispatch, commit}, worksheet_id) {
+            const worksheet_data = await means.getWorksheet(worksheet_id);
+            commit('setWorksheet', { worksheet_data });
+        },
+        clearWorksheet({dispatch, commit}) {
+            const worksheet_data = {};
+            commit('setWorksheet', { worksheet_data });
         }
     },
     getters: {
-        worksheets: state => state.worksheets,
-        requirements: state => state.requirements
+        worksheet: state => state.worksheet
     }
 }

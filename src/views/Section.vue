@@ -72,7 +72,7 @@ export default {
             return this.$route.params.name_section;
         },
         worksheets() {
-            if ( !this.$store.getters.worksheets[this.current_section] ) {
+            if ( !this.$store.getters.entries[this.current_section] ) {
                 let spinner = document.querySelector('.progress-spinner-wrapp');
                 if (spinner) spinner.style.display = 'block';
                 this.$store.dispatch('fetchWorksheetForSection', this.current_section).then(() => {
@@ -80,27 +80,27 @@ export default {
                 });
             }
             else{
-                return this.$store.getters.worksheets[this.current_section];
+                return this.$store.getters.entries[this.current_section];
             }            
         }
     },
     methods: {
         openWorksheet(worksheet) {
-            let guards = this.$store.getters.requirements[this.current_section];
-            guards = guards.filter((el) => {
-                return el.worksheet_id == worksheet.id
-            });
+            // let guards = this.$store.getters.requirements[this.current_section];
+            // guards = guards.filter((el) => {
+            //     return el.worksheet_id == worksheet.id
+            // });
 
-            guards = guards.map((el) => {
-                return el = el.name;
-            });
-            let to = { path: `/worksheet/${worksheet.id}`,name: "Worksheet", params: { "id_worksheet": worksheet.id} };
-            GuardsService.callChain(guards, to, this.$route, this.$router.push);
-            //this.$router.push( { name: "Worksheet", params: { "id_worksheet": worksheet.id} } );
+            // guards = guards.map((el) => {
+            //     return el = el.name;
+            // });
+            // let to = { path: `/worksheet/${worksheet.id}`,name: "Worksheet", params: { "id_worksheet": worksheet.id } };
+            // GuardsService.callChain(guards, to, this.$route, this.$router.push);
+            this.$router.push( { name: "Worksheet", params: { "id_worksheet": worksheet.id} } );
         }
     },
     async mounted() {
-        if ( !this.$store.getters.worksheets[this.current_section] ) {
+        if ( !this.$store.getters.entries[this.current_section] ) {
             document.querySelector('.progress-spinner-wrapp').style.display = 'block';
             await this.$store.dispatch('fetchWorksheetForSection', this.current_section);
             document.querySelector('.progress-spinner-wrapp').style.display = 'none';

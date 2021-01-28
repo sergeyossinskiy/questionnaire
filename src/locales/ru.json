@@ -10,8 +10,13 @@
         "logout": "Выйти",
         "updated": "Обновлен"
     },
-    "section" : {
+    "section": {
         "take_test" : "Пройти тест",
         "test_and_questions" : "Список тестирований и анкет"
-    }  
+    },
+    "worksheet": {
+        "stop": "Покинуть тест",
+        "complete": "Завершить",
+        "description": "Описание"
+    }
 }

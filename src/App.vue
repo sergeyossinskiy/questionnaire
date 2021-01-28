@@ -10,7 +10,7 @@
 
 <script>
 import ProgressSpinner from 'primevue/progressspinner';
-import { AppLayout, AuthLayout, ErrorLayout, EmptyLayout } from './layouts';
+import { AppLayout, AuthLayout, ErrorLayout, WorksheetLayout, EmptyLayout } from './layouts';
 
 export default {
     computed: {
@@ -19,7 +19,7 @@ export default {
         }
     },
     components: {
-        ProgressSpinner, AppLayout, AuthLayout, ErrorLayout
+        ProgressSpinner, AppLayout, AuthLayout, WorksheetLayout, ErrorLayout
     }
 }
 </script>

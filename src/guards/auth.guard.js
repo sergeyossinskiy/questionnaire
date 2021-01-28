@@ -13,7 +13,6 @@ export default class AuthGuard{
 
     canEnter(to, from){
         this.sso_query['pathname'] = to.path;
-        console.log(this.sso_query);
         if (to.name !== 'Login' && !this.auth.check()) return { name: 'Login', query: this.sso_query };        
         return;
     }

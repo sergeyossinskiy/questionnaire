@@ -10,8 +10,13 @@
         "logout": "Logout",
         "updated": "Updated"
     },
-    "section" : {
+    "section": {
         "take_test" : "Take the test",
         "test_and_questions" : "List of tests and questionnaires"
-    }     
+    },
+    "worksheet": {
+        "stop": "Leave test",
+        "complete": "Finish",
+        "description": "Description"
+    }   
 }

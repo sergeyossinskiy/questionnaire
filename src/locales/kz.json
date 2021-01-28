@@ -10,8 +10,13 @@
         "logout": "Шығу",
         "updated": "Жаңартылды"
     },
-    "section" : {
+    "section": {
         "take_test" : "Тестке қатысыңыз",
         "test_and_questions" : "Тесттер мен анкеталардың тізімі"
-    }     
+    },
+    "worksheet": {
+        "stop": "Тесттен шығу",
+        "complete": "Аяқтау",
+        "description": "Сипаттама"
+    }    
 }

@@ -28,6 +28,14 @@ export class MeansApi {
     async getWorksheetsForSection(section) {        
         return (await this.axios.get(this.api + "/questionnaire/worksheets/" + section )).data;
     }
+
+    async getRequirementsForWorksheet(worksheet_id) {        
+        return (await this.axios.get(this.api + `/questionnaire/requirements/${worksheet_id}` )).data;
+    }
+
+    async getWorksheet(worksheet_id) {        
+        return (await this.axios.get(this.api + `/questionnaire/worksheet/${worksheet_id}` )).data;
+    }
 }  
 
 window.means = new MeansApi(axios);

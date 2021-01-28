@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { GuardsService } from '../services';
 
+const guardsService = new GuardsService();
+
 const routes = [
   { 
     path: '', 
@@ -27,8 +29,8 @@ const routes = [
   { 
     path: '/worksheet/:id_worksheet',
     name: 'Worksheet',
-    meta: { layout: 'app' }, 
-    component: () => import('../views/Worksheet.vue') 
+    meta: { layout: 'worksheet' }, 
+    component: () => import('../views/Worksheet.vue')
   },
   { 
     path: '/profile', 
@@ -61,12 +63,7 @@ router.beforeEach((to, from, next) => {
         spinner.style.display = 'block';
     }
 
-    if (to.meta.guards) {
-        GuardsService.init(to, from, next);
-    }
-    else{
-        next();
-    } 
+    guardsService.init(to, from, next);
 })
 
 router.afterEach((to, from) => {
