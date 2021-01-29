@@ -25,8 +25,8 @@ export class MeansApi {
         return (await this.axios.get(this.api + "/questionnaire/sections")).data;
     }
 
-    async getWorksheetsForSection(section) {        
-        return (await this.axios.get(this.api + "/questionnaire/worksheets/" + section )).data;
+    async getWorksheetsForSection(section, lang) {        
+        return (await this.axios.get(this.api + `/questionnaire/worksheets/${section}/${lang}` )).data;
     }
 
     async getRequirementsForWorksheet(worksheet_id) {        

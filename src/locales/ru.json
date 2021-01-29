@@ -5,6 +5,7 @@
             "ru": "Русский",
             "en": "English"
         },
+        "language": "Язык",
         "login": "Войти",
         "register": "Регистрироваться",
         "logout": "Выйти",

@@ -8,9 +8,16 @@ export default{
         setSections(state, data) {
             state.sections = data;
         },
-        setWorksheetForSection(state, { section, entries }) {
-            state.entries[section] = entries.list;
-            state.requirements[section] = entries.requirements;
+        setWorksheetForSection(state, { section, lang, entries }) {
+            if (state.entries[section] && state.requirements[section]){
+                state.entries[section][lang] = entries.list;
+                state.requirements[section][lang] = entries.requirements;
+            }else{
+                state.entries[section] = [];
+                state.entries[section][lang] = entries.list;
+                state.requirements[section] = [];
+                state.requirements[section][lang] = entries.requirements;
+            }
         }
     },
     actions: {
@@ -18,9 +25,9 @@ export default{
             const sections = await means.getSections();
             commit('setSections', sections);
         },
-        async fetchWorksheetForSection({dispatch, commit}, section) {
-            const entries = await means.getWorksheetsForSection(section);
-            commit('setWorksheetForSection', { section, entries });
+        async fetchWorksheetForSection({dispatch, commit}, {section, lang}) {
+            const entries = await means.getWorksheetsForSection(section, lang);
+            commit('setWorksheetForSection', { section, lang, entries });
         }
     },
     getters: {

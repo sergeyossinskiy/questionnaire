@@ -19,7 +19,12 @@
                         <div class="p-grid">
                             <div class="p-col-12"><strong>{{ $filters.translate( slotProps.data.title,  lang ) }}</strong></div>
                             <div class="p-col-12">{{ $filters.translate( slotProps.data.description,  lang ) }}</div>
-                            <div class="p-col-12"><i class="secondary-text">{{ $t(`common.updated`) }}: {{ $filters.date( slotProps.data.updated_at ) }}</i></div>
+                            <div class="p-col-12">
+                                <i class="secondary-text">
+                                    {{ $t(`common.updated`) }}: {{ $filters.date( slotProps.data.updated_at ) + ", " + 
+                                    $t('common.language') + " - " + $t(`common.locales.${slotProps.data.lang}`) }}
+                                </i>
+                            </div>
                         </div>
                     </div>
                     <Button @click="openWorksheet(slotProps.data)">{{ $t('section.take_test') }}</Button>
@@ -73,39 +78,44 @@ export default {
         },
         worksheets() {
             if ( !this.$store.getters.entries[this.current_section] ) {
-                let spinner = document.querySelector('.progress-spinner-wrapp');
-                if (spinner) spinner.style.display = 'block';
-                this.$store.dispatch('fetchWorksheetForSection', this.current_section).then(() => {
-                    if (spinner) spinner.style.display = 'none';
-                });
+                this.loadWorksheet();           
+            }
+            else if(!this.$store.getters.entries[this.current_section][this.lang]){
+                this.loadWorksheet();
             }
             else{
-                return this.$store.getters.entries[this.current_section];
+                return this.$store.getters.entries[this.current_section][this.lang];
             }            
+        }
+    },
+    watch: {
+        lang: function (newlang, oldlang) {
+            this.loadWorksheet();
         }
     },
     methods: {
         openWorksheet(worksheet) {
-            // let guards = this.$store.getters.requirements[this.current_section];
-            // guards = guards.filter((el) => {
-            //     return el.worksheet_id == worksheet.id
-            // });
-
-            // guards = guards.map((el) => {
-            //     return el = el.name;
-            // });
-            // let to = { path: `/worksheet/${worksheet.id}`,name: "Worksheet", params: { "id_worksheet": worksheet.id } };
-            // GuardsService.callChain(guards, to, this.$route, this.$router.push);
             this.$router.push( { name: "Worksheet", params: { "id_worksheet": worksheet.id} } );
+        },
+        loadWorksheet() {
+            let spinner = document.querySelector('.progress-spinner-wrapp');
+            if (spinner) 
+                spinner.style.display = 'block';
+            this.$store.dispatch('fetchWorksheetForSection', { section: this.current_section, lang: this.lang }).then(() => {
+                if (spinner) 
+                    spinner.style.display = 'none';
+            });
         }
     },
     async mounted() {
         if ( !this.$store.getters.entries[this.current_section] ) {
-            document.querySelector('.progress-spinner-wrapp').style.display = 'block';
-            await this.$store.dispatch('fetchWorksheetForSection', this.current_section);
-            document.querySelector('.progress-spinner-wrapp').style.display = 'none';
+            this.loadWorksheet();           
         }
-    }
+        else if(!this.$store.getters.entries[this.current_section][this.lang]){
+            this.loadWorksheet();
+        }
+    },
+    
 };
 </script>
 
