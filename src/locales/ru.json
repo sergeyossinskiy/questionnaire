@@ -18,6 +18,8 @@
     "worksheet": {
         "stop": "Покинуть тест",
         "complete": "Завершить",
-        "description": "Описание"
+        "description": "Описание",
+        "other_answer": "Другой ответ",
+        "answer": "Ответ"
     }
 }

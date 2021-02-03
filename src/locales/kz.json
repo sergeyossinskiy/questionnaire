@@ -18,6 +18,8 @@
     "worksheet": {
         "stop": "Тесттен шығу",
         "complete": "Аяқтау",
-        "description": "Сипаттама"
+        "description": "Сипаттама",
+        "other_answer": "Тағы бір жауап",
+        "answer": "Жауап"
     }    
 }

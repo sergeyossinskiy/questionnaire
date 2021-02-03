@@ -16,18 +16,12 @@
 
             <div class="description">
                 {{ $filters.translate(worksheet.description, lang) }}
-            </div> 
+            </div>
 
-            <Panel v-for="item in worksheet.questions" :key="item.id">
-                <template #header>
-                    {{ item.question }}
-                </template>
-
-                <div v-for="vr in item.variants" :key="vr.id">
-                    {{ vr.variant }}
-                </div>
-
-            </Panel>
+            <Question v-for="item in worksheet.questions" :key="item.id" 
+                    :it="item"
+                    :onSetAnswer="onSetAnswer"
+            />
 
         </template>
 
@@ -40,11 +34,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Divider from 'primevue/divider';
-import Panel from 'primevue/panel';
+import Question from "@/components/landing/Question.vue";
 
 export default {
     name: "Worksheet",
@@ -52,15 +45,18 @@ export default {
         Card,
         Button,
         Divider,
-        Panel
+        Question
     },
     data() {
         return {
             worksheet_id: this.$route.params.id_worksheet,
+            answers: {}
         }
     },
     computed: {
-        ...mapGetters(['lang']),
+        lang() {
+            return this.$store.getters.lang || this.$i18n.locale;
+        },
         worksheet() {
             return this.$store.getters.worksheet;
         }  
@@ -69,6 +65,10 @@ export default {
         exit() {
             this.$router.push({ path: `/section/${this.worksheet.section.name}`});
             this.$store.dispatch('clearWorksheet'); 
+        },
+        onSetAnswer(data) {
+            this.answers[data.question_id] = data.answer;
+            console.log(this.answers);
         }
     },
     async mounted() {        

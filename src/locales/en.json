@@ -18,6 +18,8 @@
     "worksheet": {
         "stop": "Leave test",
         "complete": "Finish",
-        "description": "Description"
+        "description": "Description",
+        "other_answer": "Another answer",
+        "answer": "Answer"
     }   
 }
