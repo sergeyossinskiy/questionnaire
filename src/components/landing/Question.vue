@@ -42,3 +42,27 @@ export default {
     }
 }
 </script>
+
+
+<style lang="scss">
+
+    .variants {
+        margin-bottom: 1rem;
+
+        label {
+            padding-left: 1rem;
+        }
+        
+    }
+
+    .variant_other {
+        display: inline-block;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    input[type="text"] {
+        width: 100%;
+    }
+
+</style>

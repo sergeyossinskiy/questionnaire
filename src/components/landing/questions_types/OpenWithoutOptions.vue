@@ -5,8 +5,8 @@
             {{ it.question }}
         </template>
 
-        <label :for="'variant_other'+it.id">{{ $t('worksheet.answer', lang) }}: </label>
-        <InputText :id="'variant_other'+it.id" type="text" @input="changeOther" />
+        <label :for="'variant_other'+it.id" class="variant_other">{{ $t('worksheet.answer', lang) }}: </label>
+        <InputText :id="'variant_other'+it.id" type="text" @input="changeOther" v-model="other"/>
 
     </Panel>
 </template>

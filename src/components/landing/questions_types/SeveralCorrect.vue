@@ -5,7 +5,7 @@
             {{ it.question }}
         </template>
 
-        <div v-for="vr in it.variants" :key="vr.id">
+        <div v-for="vr in it.variants" :key="vr.id" class="variants">
             <Checkbox :id="'variant'+vr.id" :name="'question'+it.id" :value="vr.id" v-model="checked" @change="change" />
             <label :for="'variant'+vr.id">{{ vr.variant }}</label>        
         </div>

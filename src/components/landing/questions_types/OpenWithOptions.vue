@@ -5,13 +5,13 @@
             {{ it.question }}
         </template>
 
-        <div v-for="vr in it.variants" :key="vr.id">
+        <div v-for="vr in it.variants" :key="vr.id" class="variants">
             <Checkbox :id="'variant'+vr.id" :name="'question'+it.id" :value="vr.id" v-model="checked" @change="change" />
             <label :for="'variant'+vr.id">{{ vr.variant }}</label>        
         </div>
 
-        <label :for="'variant_other'+it.id">{{ $t('worksheet.other_answer', lang) }}: </label>
-        <InputText :id="'variant_other'+it.id" type="text" @input="changeOther" />
+        <label :for="'variant_other'+it.id" class="variant_other">{{ $t('worksheet.other_answer', lang) }}: </label>
+        <InputText :id="'variant_other'+it.id" type="text" @input="changeOther" v-model="other"/>
 
     </Panel>
 </template>
@@ -66,5 +66,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
 
 </style>

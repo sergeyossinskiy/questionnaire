@@ -5,13 +5,13 @@
             {{ it.question }}
         </template>
 
-        <div v-for="vr in it.variants" :key="vr.id">
+        <div v-for="vr in it.variants" :key="vr.id" class="variants">
             <RadioButton :id="'variant'+vr.id" :name="'question'+it.id" :value="vr.id" v-model="checked" @change="change" />
             <label :for="'variant'+vr.id">{{ vr.variant }}</label>        
         </div>
 
-        <label :for="'variant_other'+it.id">{{ $t('worksheet.other_answer', lang) }}: </label>
-        <InputText :id="'variant_other'+it.id" type="text" @input="changeOther" />
+        <label :for="'variant_other'+it.id" class="variant_other">{{ $t('worksheet.other_answer', lang) }}: </label>
+        <InputText :id="'variant_other'+it.id" type="text" @input="changeOther" v-model="other"/>
 
     </Panel>
 </template>
@@ -35,7 +35,7 @@ export default {
     },
     data() {
 		return {
-            checked: [],
+            checked: null,
             other: null
         }
 	},
@@ -45,10 +45,12 @@ export default {
         }
     },
     methods: {
-        change: function() {            
+        change: function() { 
+            if ( this.other ) this.other = null;           
             this.sentChanges();
         },
         changeOther: function(event) {
+            if ( this.checked ) this.checked = null;  
             this.other = event.currentTarget.value;
             this.sentChanges();
         },
