@@ -9,17 +9,31 @@
         "login": "Войти",
         "register": "Регистрироваться",
         "logout": "Выйти",
-        "updated": "Обновлен"
+        "updated": "Обновлен",
+        "to_home": "На главную",
+        "auth_required": "Требуется аутентификация",
+        "auth_required_descript": "Для того чтобы продолжить вам необходимо зарегистрироваться или войти",
+        "errors": {
+            "404_descript": "Ресурс не найден"
+        }
     },
     "section": {
         "take_test" : "Пройти тест",
-        "test_and_questions" : "Список тестирований и анкет"
+        "test_and_questions" : "Список тестирований и анкет",
+        "select_category": "Выберете категорию"
     },
     "worksheet": {
         "stop": "Покинуть тест",
         "complete": "Завершить",
         "description": "Описание",
         "other_answer": "Другой ответ",
-        "answer": "Ответ"
+        "answer": "Ответ",
+        "answer_all_questions": "Чтобы завершить неоходимо ответить на все вопросы",
+        "number_of_answers": "Дано ответов",
+        "result": "Результат",
+        "your_saved_result": "Вы набрали {result} балл(-а, -ов)"
+    },
+    "modules": {
+        "manage": "Управление"
     }
 }

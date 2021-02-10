@@ -3,10 +3,10 @@
     <DataView :value="worksheets" :layout="layout">
         <template #header>
             <div class="p-grid p-nogutter">
-                <div class="p-col-6" style="text-align: left">
+                <div class="p-col-12 p-md-6" style="text-align: left">
                    <h3>{{ $t('section.test_and_questions') }}</h3>
                 </div>
-                <div class="p-col-6" style="text-align: right">
+                <div class="p-col-0 p-md-6" style="text-align: right">
                     <DataViewLayoutOptions v-model="layout" />
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         <i class="secondary-text"> {{ $t(`common.updated`) }}: 
                         {{ $filters.date( slotProps.data.updated_at ) }} </i>
                     </div>
-                    <Button>{{ $t('section.take_test') }}</Button>
+                    <Button @click="openWorksheet(slotProps.data)">{{ $t('section.take_test') }}</Button>
                 </Panel>
             </div>
         </template>
@@ -105,6 +105,17 @@ export default {
                 if (spinner) 
                     spinner.style.display = 'none';
             });
+        },
+        initLayoutDataView(el) {
+            if (el.innerWidth <= 767){
+                this.layout = 'grid';
+            }
+            else{
+                this.layout = 'list';
+            }
+        },
+        _initLayoutDataView(e) {
+            this.initLayoutDataView(e.currentTarget);
         }
     },
     async mounted() {
@@ -114,6 +125,9 @@ export default {
         else if(!this.$store.getters.entries[this.current_section][this.lang]){
             this.loadWorksheet();
         }
+
+        this.initLayoutDataView(window);
+        window.addEventListener("resize", this._initLayoutDataView);
     },
     
 };
@@ -152,6 +166,12 @@ export default {
             min-width: 130px;
             width: auto;
             align-self: flex-start;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        .p-dataview-layout-options {
+            display: none;
         }
     }
 </style>

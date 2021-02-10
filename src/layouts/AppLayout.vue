@@ -11,12 +11,6 @@
             <router-view/>  
         </div>
     </div>
-    <!-- <div id="nav">
-        <router-link to="/home">Home</router-link> |
-        <router-link to="/login">Login</router-link> |
-        <router-link to="/about">About</router-link> |
-        <router-link to="/profile">Profile</router-link>
-    </div> -->
   
 </template>
 
@@ -69,6 +63,19 @@ export default {
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%);
+            }
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+        div.app-layout {
+            div.content,
+            div.sidebar {
+                height: auto;
+            }
+
+            div.content {
+                min-height: 400px;
             }
         }
     }

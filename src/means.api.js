@@ -1,5 +1,4 @@
 import axios from 'axios';
-//import VueAxios from 'vue-axios';
 
 export class MeansApi {
     api = 'http://means.kgu.kz/api';
@@ -9,15 +8,30 @@ export class MeansApi {
 
     constructor(_axios) {
         this.axios = _axios;
+        // this.sso_access_token = localStorage.getItem('sso-access-token');
+        // this.http_options = this.sso_access_token ? { headers: { 'sso-access-token': this.sso_access_token } } : {};
+    }
+
+    addTokenToHeaders() {
         this.sso_access_token = localStorage.getItem('sso-access-token');
-        this.http_options = { headers: { 'sso-access-token': this.sso_access_token } };
+        this.http_options = this.sso_access_token ? { headers: { 'sso-access-token': this.sso_access_token } } : {};
+    }
+
+    activeRouteCompactToGET(){
+        return {
+                    "protocol": window.location.protocol, 
+                    "address": window.location.hostname,
+                    "port": window.location.port,
+                    "pathname": decodeURI(window.location.pathname)
+                }
     }
 
     async university() {
         return (await this.axios.get(this.api + '/management/university_for_partner')).data;
     }
 
-    async logout() {        
+    async logout() {   
+        this.addTokenToHeaders();     
         await this.axios.get(this.sso_api + "/logout", this.http_options);
     }
 
@@ -35,6 +49,20 @@ export class MeansApi {
 
     async getWorksheet(worksheet_id) {        
         return (await this.axios.get(this.api + `/questionnaire/worksheet/${worksheet_id}` )).data;
+    }
+
+    async saveAnswers(answers) {
+        this.addTokenToHeaders();
+        return this.axios.post(this.api + "/questionnaire/answers/save", answers, this.http_options);
+    }
+
+    async checkModuleAvailability(module_name) {
+        this.addTokenToHeaders();
+        module_name = 'quiz_' + module_name;
+
+        let sso_query = this.activeRouteCompactToGET();
+
+        return (await this.axios.post(this.sso_api + "/check_module", {module_name, ...sso_query}, this.http_options)).data;
     }
 }  
 

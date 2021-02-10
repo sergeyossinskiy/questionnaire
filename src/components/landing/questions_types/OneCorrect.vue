@@ -40,7 +40,7 @@ export default {
         change: function() {
             this.onSetAnswer({
                 question_id: this.it.id,
-                answer: this.checked
+                answer: { checked: this.checked }
             })
         }
     },

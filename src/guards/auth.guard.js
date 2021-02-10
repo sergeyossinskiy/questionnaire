@@ -1,7 +1,7 @@
 import { AuthService } from "../services";
 import { SSOParamsService } from "../services";
 
-export default class AuthGuard{
+export class AuthGuard{
     auth;
     sso_query;
 

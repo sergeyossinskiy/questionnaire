@@ -1,4 +1,11 @@
+import { AuthGuard, NoauthGuard, AvailableGuard } from '../guards';
+
 export class GuardsService {
+    guardsMap = {
+        "auth": AuthGuard,
+        "noauth": NoauthGuard,
+        "available": AvailableGuard
+    };
     loadedGuards = {};
 
     async init(to, from, next) {
@@ -19,7 +26,7 @@ export class GuardsService {
     async metaGuards(to, from, next) {
         let guards = to.meta.guards;
 
-        this.executeChain(guards, to, from, next);
+        await this.executeChain(guards, to, from, next);
     }
 
     async worksheetGuards(to, from, next) {
@@ -36,21 +43,25 @@ export class GuardsService {
         if(guards.length == 0) next();
     }
 
-    executeChain(guards, to, from, next) {
+    async executeChain(guards, to, from, next) {
         let _next;
 
         for (let index = 0; index < guards.length; index++) {
-            let item = guards[index];
-            import('../guards/' + item + '.guard.js')
-            .then(module => {                
-                let guard = new module.default();
-                if (guard.canEnter(to, from) !== undefined ) {
-                    _next = guard.canEnter(to, from);
+            let guard = new (this.guardsMap[ guards[index] ]);
+
+            if (guard.canEnter(to, from) !== undefined ) {
+                _next = guard.canEnter(to, from);
+                
+                if (_next.then) {
+                    _next.then(value => next(value));
+                    break;
                 }
 
-                if (index == (guards.length - 1)) next(_next);
-            })
-            .catch(err => { console.log(err) });
+                next(_next);
+                break;
+            }
+    
+            if (index == (guards.length - 1)) next(_next);
         }
     }
 }

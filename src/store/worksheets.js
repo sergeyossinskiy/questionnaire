@@ -15,6 +15,9 @@ export default{
         clearWorksheet({dispatch, commit}) {
             const worksheet_data = {};
             commit('setWorksheet', { worksheet_data });
+        },
+        saveAnswers({dispatch, commit}, answers) {
+            return means.saveAnswers(answers);
         }
     },
     getters: {

@@ -1,3 +1,4 @@
 export const AppConfig = {
-    appName: 'Вопросник'
+    appName: 'Qiuz',
+    appSubTitle: 'by Means'
 };

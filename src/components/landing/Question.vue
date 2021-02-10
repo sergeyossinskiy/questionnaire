@@ -1,6 +1,6 @@
 <template>  
 
-    <component :it="it" :variants="it.variants" :is="variantsType" :onSetAnswer='setAnswer'></component>
+    <component :it="it" :variants="shuffleVariants" :is="variantsType" :onSetAnswer='setAnswer'></component>
     
 </template>
 
@@ -33,6 +33,9 @@ export default {
         ...mapGetters(['lang']),
         variantsType() {
             return StringUtility.snakeToPascal(this.it.type.name);
+        },
+        shuffleVariants() {
+            return this.it.variants.sort(() => Math.round(Math.random() * 100) - 50);
         }
     },
     methods: {

@@ -5,9 +5,11 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
 import AuthPlugin from './plugins/auth.plugin';
 import ConfigPlugin from './plugins/config.plugin';
 import FiltersPlugin from './plugins/filters.plugin';
+
 import './means.api';
 
 createApp(App).use(store)
@@ -16,5 +18,6 @@ createApp(App).use(store)
                 .use(AuthPlugin)
                 .use(ConfigPlugin)
                 .use(FiltersPlugin)
+                .use(ToastService)
                 .use(PrimeVue)
                 .mount('#app');

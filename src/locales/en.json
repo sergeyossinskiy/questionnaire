@@ -9,17 +9,31 @@
         "login": "Login",
         "register": "Register",
         "logout": "Logout",
-        "updated": "Updated"
+        "updated": "Updated",
+        "to_home": "To home",
+        "auth_required": "Authentication required",
+        "auth_required_descript": "In order to continue you need to register or login",
+        "errors": {
+            "404_descript": "The resource can not be found"
+        }
     },
     "section": {
         "take_test" : "Take the test",
-        "test_and_questions" : "List of tests and questionnaires"
+        "test_and_questions" : "List of tests and questionnaires",
+        "select_category": "Choose a category"
     },
     "worksheet": {
         "stop": "Leave test",
         "complete": "Finish",
         "description": "Description",
         "other_answer": "Another answer",
-        "answer": "Answer"
+        "answer": "Answer",
+        "answer_all_questions": "To complete it is necessary to answer all questions",
+        "number_of_answers": "Answers given",
+        "result": "The result",
+        "your_saved_result": "You scored {result} points"
+    },
+    "modules": {
+        "manage": "Control"
     }   
 }

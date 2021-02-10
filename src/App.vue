@@ -20,6 +20,9 @@ export default {
     },
     components: {
         ProgressSpinner, AppLayout, AuthLayout, WorksheetLayout, ErrorLayout
+    },
+    mounted() {
+        this.$store.commit('readLevel');
     }
 }
 </script>
@@ -41,7 +44,7 @@ export default {
     }
 
     .p-progress-spinner-container {
-        position: absolute;  
+        position: fixed;  
         display: none;
         height: 100vh;
         width: 100vw;  

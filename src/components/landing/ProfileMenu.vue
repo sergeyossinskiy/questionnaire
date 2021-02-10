@@ -21,6 +21,13 @@ export default {
         }
 	},
     computed: {
+        userName() {
+            let user = this.$store.getters.levelData.user;
+            return user.lastname + " " + user.firstname; 
+        },
+        modules() {
+            return this.$store.getters.levelData.modules;
+        },
         actions() {
             let items = {
                 login: {
@@ -41,11 +48,32 @@ export default {
                         this.$auth.logout();
 					}
                 }
-            };
+            };            
 
+            return this.initItemsMenu( items );
+        }
+    },
+    methods: {
+        toggle(event) {
+            this.$refs.menu.toggle(event);
+        },
+        initItemsMenu( items ) {
             let enable_items = [];
 
             if ( this.$store.getters.isAuth ) {
+                enable_items.push({                        
+                        label: this.userName,
+                        style: "font-size: 14px;",
+                        disabled: true
+                });
+
+                this.modules.forEach(module => {
+                    enable_items.push({
+                        label: this.$t(`modules.${module.replace('quiz_', '')}`),
+                        to: `/${module.replace('quiz_', '')}`
+                    });
+                });
+
                 enable_items.push(items.logout);
             }
             else{
@@ -55,13 +83,7 @@ export default {
             return enable_items;
         }
     },
-    methods: {
-        toggle(event) {
-            this.$refs.menu.toggle(event);
-        }
-    },
     mounted() {
-        
     }
 }
 </script>

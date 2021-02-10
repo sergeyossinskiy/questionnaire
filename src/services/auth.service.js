@@ -11,6 +11,7 @@ export class AuthService {
   
       if (params['token'] != undefined){ 
         localStorage.setItem('sso-access-token', params['token'] );
+        localStorage.setItem('sso-level', params['level'] );
         this.store.dispatch('login');
 
         this.openDestination( params );

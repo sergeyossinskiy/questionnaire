@@ -1,4 +1,6 @@
 <template>
+    <Toast />
+
     <div class="p-grid layout">
         <div class="p-col-12 p-md-10 p-md-offset-1 content">
             <div class="progress-spinner-wrapp">
@@ -12,11 +14,13 @@
 </template>
 
 <script>
+import Toast from 'primevue/toast';
 import ProgressSpinner from 'primevue/progressspinner';
 
 export default {
     name: "WorksheetLayout",
     components: {
+        Toast,
         ProgressSpinner
     }
 }

@@ -17,7 +17,7 @@ const routes = [
   { 
     path: '/login', 
     name: 'Login', 
-    meta: { layout: 'auth' }, 
+    meta: { layout: 'auth', guards: ['noauth'] }, 
     component: () => import('../views/auth/Login.vue') 
   },
   { 
@@ -32,6 +32,12 @@ const routes = [
     meta: { layout: 'worksheet' }, 
     component: () => import('../views/Worksheet.vue')
   },
+  { 
+    path: '/manage', 
+    name: 'Manage', 
+    meta: { layout: 'dashboard', guards: ['auth', 'available'] },
+    component: () => import('../views/Manage.vue') 
+  }, 
   { 
     path: '/profile', 
     name: 'Profile', 
