@@ -1,7 +1,7 @@
 <template>
     <div class="control">
         <div class="p-d-flex">
-            <Button v-if="!atHome" icon="pi pi-home" class="p-button-raised p-button-rounded p-mr-3" @click="toHome"/>
+            <Button v-if="!atHome" icon="pi pi-home" class="p-button-raised p-mr-3" @click="toHome"/>
             <ProfileMenu />  
         </div>         
         <LocaleSwitcher />         

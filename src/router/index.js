@@ -6,12 +6,15 @@ const guardsService = new GuardsService();
 const routes = [
   { 
     path: '', 
-    redirect: 'home'
+    redirect: 'home',
+    meta: {
+      title: "Quiz"
+    }
   },
   { 
     path: '/home', 
     name: 'Home', 
-    meta: { layout: 'app' }, 
+    meta: { title: "Quiz", layout: 'app' }, 
     component: () => import('../views/Home.vue') 
   },
   { 
@@ -70,6 +73,8 @@ router.beforeEach((to, from, next) => {
     }
 
     guardsService.init(to, from, next);
+
+    if (to.meta.title) document.title = to.meta.title;
 })
 
 router.afterEach((to, from) => {

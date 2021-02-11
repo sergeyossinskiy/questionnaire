@@ -1,28 +1,27 @@
 <template> 
 
-    manage
+    <component :is="operation" />
 
 </template>
 
 <script>
-import Card from 'primevue/card';
-import Button from 'primevue/button';
-import Divider from 'primevue/divider';
-import Question from "@/components/landing/Question.vue";
+import Panel from 'primevue/panel';
+import { Listfiles, Newfile } from '../components/dashboard';
 
 export default {
     name: "Manage",
     components: {
-        Card,
-        Button,
-        Divider,
-        Question
+        Panel,
+        Listfiles,
+        Newfile
     },
     data() {
         return {}
     },
     computed: {
-         
+        operation() {
+            return this.$store.getters.operation;
+        }
     },
     methods: {
     },

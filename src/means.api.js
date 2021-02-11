@@ -64,6 +64,11 @@ export class MeansApi {
 
         return (await this.axios.post(this.sso_api + "/check_module", {module_name, ...sso_query}, this.http_options)).data;
     }
+
+    async getFiles() {
+        this.addTokenToHeaders();     
+        return (await this.axios.get(this.api + `/questionnaire/worksheets/all`, this.http_options )).data;
+    }
 }  
 
 window.means = new MeansApi(axios);

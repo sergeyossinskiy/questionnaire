@@ -3,6 +3,7 @@ import app from './app';
 import auth from './auth';
 import sections from './sections';
 import worksheets from './worksheets';
+import manage from './manage';
 
 export default createStore({
   state: {
@@ -12,6 +13,6 @@ export default createStore({
   actions: {
   },
   modules: {
-    app, auth, sections, worksheets
+    app, auth, sections, worksheets, manage
   }
 })

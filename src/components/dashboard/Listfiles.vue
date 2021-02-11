@@ -1,10 +1,10 @@
-<template> 
+<template>
 
-    <DataView :value="worksheets" :layout="layout">
+    <DataView :value="files" :layout="layout" :paginator="true" :rows="10">
         <template #header>
             <div class="p-grid p-nogutter">
-                <div class="p-col-12 p-md-6" style="text-align: left">
-                   <h3>{{ $t('section.test_and_questions') }}</h3>
+                <div class="p-col-12 p-md-6 title-operation" style="text-align: left">
+                    <span>{{ $t('common.files_list') }}</span>
                 </div>
                 <div class="p-col-0 p-md-6" style="text-align: right">
                     <DataViewLayoutOptions v-model="layout" />
@@ -27,7 +27,8 @@
                             </div>
                         </div>
                     </div>
-                    <Button @click="openWorksheet(slotProps.data)">{{ $t('section.take_test') }}</Button>
+                    <Button >{{ $t('common.edit') }}</Button>
+                    <!-- @click="openWorksheet(slotProps.data)" -->
                 </div>
             </div>
         </template>
@@ -40,72 +41,66 @@
                         <i class="secondary-text"> {{ $t(`common.updated`) }}: 
                         {{ $filters.date( slotProps.data.updated_at ) }} </i>
                     </div>
-                    <Button @click="openWorksheet(slotProps.data)">{{ $t('section.take_test') }}</Button>
+                    <Button >{{ $t('common.edit') }}</Button>
+                    <!-- @click="openWorksheet(slotProps.data) -->
                 </Panel>
             </div>
         </template>
     </DataView>
+    <!-- <Panel>
+        <template #header>
+
+            {{ $t('common.files_list') }}
+            <Dropdown v-model="selectedSection" :options="sections" optionLabel="title" optionValue="name">
+                <template #value="">
+                    <span>{{ currentSectionPlaceholder || $t('section.select_category') }}</span>
+                </template>
+                <template #option="slotProps">
+                    <span>{{ $filters.translate( slotProps.option.title, lang )  }}</span>
+                </template>
+            </Dropdown> 
+
+        </template>
+        Manage
+    </Panel> -->
+
+   
 
 </template>
 
 <script>
+import { FilesService } from '@/services';
 import DataView from 'primevue/dataview';
-import Dropdown from 'primevue/dropdown';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions';
-import Panel from 'primevue/panel';
 import Button from 'primevue/button';
-import { GuardsService } from '../services';
-import { mapGetters } from 'vuex';
+
+import Panel from 'primevue/panel';
+import Dropdown from 'primevue/dropdown';
 
 export default {
-    name: "Section",
+    name: 'Listfiles',
     components: {
         DataView,
         DataViewLayoutOptions,
-        Dropdown,
+        Button,
         Panel,
-        Button
+        Dropdown
     },
     data() {
-        return {        
-            layout: 'list',
+		return {
+            layout: 'list'
         }
-    },
+	},
     computed: {
-        ...mapGetters(['lang']),
-        current_section() {
-            return this.$route.params.name_section;
+        lang() {
+            return this.$store.getters.lang || this.$i18n.locale;
         },
-        worksheets() {
-            if ( !this.$store.getters.entries[this.current_section] ) {
-                this.loadWorksheet();           
-            }
-            else if(!this.$store.getters.entries[this.current_section][this.lang]){
-                this.loadWorksheet();
-            }
-            else{
-                return this.$store.getters.entries[this.current_section][this.lang];
-            }            
-        }
-    },
-    watch: {
-        lang: function (newlang, oldlang) {
-            this.loadWorksheet();
+        files() {
+            console.log(this.filesService.getAll());
+            return this.filesService.getAll();
         }
     },
     methods: {
-        openWorksheet(worksheet) {
-            this.$router.push( { name: "Worksheet", params: { "id_worksheet": worksheet.id} } );
-        },
-        loadWorksheet() {
-            let spinner = document.querySelector('.progress-spinner-wrapp');
-            if (spinner) 
-                spinner.style.display = 'block';
-            this.$store.dispatch('fetchWorksheetForSection', { section: this.current_section, lang: this.lang }).then(() => {
-                if (spinner) 
-                    spinner.style.display = 'none';
-            });
-        },
         initLayoutDataView(el) {
             if (el.innerWidth <= 767){
                 this.layout = 'grid';
@@ -118,35 +113,37 @@ export default {
             this.initLayoutDataView(e.currentTarget);
         }
     },
-    async mounted() {
-        if ( !this.$store.getters.entries[this.current_section] ) {
-            this.loadWorksheet();           
-        }
-        else if(!this.$store.getters.entries[this.current_section][this.lang]){
-            this.loadWorksheet();
-        }
-
+    filesService: null,
+    created() {
+        this.filesService = new FilesService( this.$store );
+    },
+    mounted() {
         this.initLayoutDataView(window);
         window.addEventListener("resize", this._initLayoutDataView);
-    },
-    
-};
+    }
+}
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    h3 {
-        margin: 0.5rem 0;
-    }
 
-    .secondary-text {
-        font-size: 14px;
-        color: #aaaaaa;
+    ::v-deep(.p-dataview-header){
+            padding: 0.5rem 2rem 0.5rem 2rem;
     }
 
     ::v-deep(.p-panel-content) {
         img {
             max-height: 64px;
         }
+    }
+
+    .title-operation {
+        padding-top: 0.5rem;
+    }
+
+    .secondary-text {
+        font-size: 14px;
+        color: #aaaaaa;
     }
 
     .item-details {
@@ -169,7 +166,7 @@ export default {
         }
 
         .p-button {
-            min-width: 130px;
+            min-width: 100px;
             width: auto;
             align-self: flex-start;
         }
@@ -180,4 +177,13 @@ export default {
             display: none;
         }
     }
+
+    @media only screen and (min-width: 767px) {
+        ::v-deep(.p-grid){
+            overflow: hidden;
+            overflow-y: auto;
+            max-height: 450px;
+        }
+    }
+
 </style>

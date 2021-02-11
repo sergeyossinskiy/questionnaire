@@ -13,6 +13,9 @@
         "to_home": "To home",
         "auth_required": "Authentication required",
         "auth_required_descript": "In order to continue you need to register or login",
+        "file": "File",
+        "files_list": "list of files",
+        "edit": "Edit",
         "errors": {
             "404_descript": "The resource can not be found"
         }
