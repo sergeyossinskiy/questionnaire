@@ -15,6 +15,8 @@
         "auth_required_descript": "In order to continue you need to register or login",
         "file": "File",
         "files_list": "list of files",
+        "new_file": "New file",
+        "create": "Create",
         "edit": "Edit",
         "errors": {
             "404_descript": "The resource can not be found"
@@ -34,7 +36,10 @@
         "answer_all_questions": "To complete it is necessary to answer all questions",
         "number_of_answers": "Answers given",
         "result": "The result",
-        "your_saved_result": "You scored {result} points"
+        "your_saved_result": "You scored {result} points",
+        "select_type": "Choose type",
+        "select_section": "Choose a category",
+        "select_lang": "Select language"
     },
     "modules": {
         "manage": "Control"

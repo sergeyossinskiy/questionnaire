@@ -1,5 +1,5 @@
 <template>
-    <Menubar :model="items">
+    <Menubar :model="items" :options="items">
         <template #start>
             <router-link to="/home">
                 <h1 class="app-name">{{ appName }}</h1>
@@ -8,7 +8,7 @@
             <!-- <img alt="logo" src="../../assets/images/logo.svg" height="40" class="p-mr-2"> -->
         </template>
         <template #end>
-            <InputText placeholder="Search" type="text" />
+            <LocaleSwitcher />
         </template>
     </Menubar>
 </template>
@@ -16,6 +16,7 @@
 <script>
 import Menubar from 'primevue/menubar';
 import Button from 'primevue/button';
+import LocaleSwitcher from '../landing/LocaleSwitcher';
 import InputText from 'primevue/inputtext';
 
 export default {
@@ -23,17 +24,36 @@ export default {
     components: {
         Menubar,
         Button,
+        LocaleSwitcher,
         InputText
     },
     data() {
 		return {
-            items: [
+            items: this.getItemsMenu()
+        }
+	},
+    computed: {
+        appName() {
+            return this.$config.appName;
+        },
+        lang() {
+            return this.$store.getters.lang || this.$i18n.locale;
+        }
+    },
+    watch: {
+        lang: function (newlang, oldlang) {
+            this.items = this.getItemsMenu();
+        }
+    },
+    methods: {
+        getItemsMenu() {
+            return [
                 {
-                    label:this.$t('common.file'),
-                    icon:'pi pi-fw pi-file',
-                    items:[
+                    label: this.$t('common.file'),
+                    icon: 'pi pi-fw pi-file',
+                    items: [
                         {
-                            label:'New',
+                            label: this.$t('common.create'),
                             icon:'pi pi-fw pi-plus',
                             command: () => {
                                 this.$store.commit('setOperation', 'newfile');
@@ -48,18 +68,7 @@ export default {
                         }
                     ]
                 }
-             ]
-        }
-	},
-    computed: {
-        appName() {
-            return this.$config.appName;
-        }
-    },
-    methods: {
-        toHome (event){
-            this.selectedSection = undefined;
-            this.$router.push({ name: "Home"});
+            ];
         }
     }
 }

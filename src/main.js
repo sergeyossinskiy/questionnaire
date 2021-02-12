@@ -11,6 +11,7 @@ import ConfigPlugin from './plugins/config.plugin';
 import FiltersPlugin from './plugins/filters.plugin';
 
 import './means.api';
+import './spinner';
 
 createApp(App).use(store)
                 .use(router)

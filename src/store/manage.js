@@ -1,7 +1,8 @@
 export default{
     state: {
         operation: 'listfiles',
-        files: null
+        files: null,
+        dependences: null
     },
     mutations: {
         setOperation(state, data) {
@@ -9,6 +10,9 @@ export default{
         },
         setFiles(state, data) {
             state.files = data;
+        },
+        setDependences(state, data) {
+            state.dependences = data;
         }
     },
     actions: {
@@ -16,12 +20,17 @@ export default{
             commit('setOperation', operation);
         },
         async fetchFiles({dispatch, commit}) {
-            const files = await means.getFiles();
-            commit('setFiles', files);
+            const worksheets = await means.getWorksheets();
+            commit('setFiles', worksheets);
+        },
+        async fetchDependences({dispatch, commit}) {
+            const dependences = await means.getWorksheetDependences();
+            commit('setDependences', dependences);
         }
     },
     getters: {
         operation: state => state.operation,
-        files: state => state.files
+        files: state => state.files,
+        dependences: state => state.dependences
     }
 }

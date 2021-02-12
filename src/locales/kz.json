@@ -15,6 +15,8 @@
         "auth_required_descript": "Жалғастыру үшін сізге тіркелу немесе кіру қажет",
         "file": "Файл",
         "files_list": "Файлдардың тізімі",
+        "new_file": "Жаңа файл",
+        "create": "Жаңа",
         "edit": "Өңдеу",
         "errors": {
             "404_descript": "Ресурсты табу мүмкін емес"
@@ -34,7 +36,10 @@
         "answer_all_questions": "Аяқтау үшін барлық сұрақтарға жауап беру керек",
         "number_of_answers": "Берілген жауаптар",
         "result": "Нәтиже",
-        "your_saved_result": "Сіз {result} ұпай жинадыңыз"
+        "your_saved_result": "Сіз {result} ұпай жинадыңыз",
+        "select_type": "Түрін таңдаңыз",
+        "select_section": "Санатты таңдаңыз",
+        "select_lang": "Тілді таңдаңыз"
     },
     "modules": {
         "manage": "Бақылау"

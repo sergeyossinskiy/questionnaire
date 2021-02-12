@@ -15,6 +15,8 @@
         "auth_required_descript": "Для того чтобы продолжить вам необходимо зарегистрироваться или войти",
         "file": "Файл",
         "files_list": "Список файлов",
+        "new_file": "Новый файл",
+        "create": "Создать",
         "edit": "Изменить",
         "errors": {
             "404_descript": "Ресурс не найден"
@@ -34,7 +36,10 @@
         "answer_all_questions": "Чтобы завершить неоходимо ответить на все вопросы",
         "number_of_answers": "Дано ответов",
         "result": "Результат",
-        "your_saved_result": "Вы набрали {result} балл(-а, -ов)"
+        "your_saved_result": "Вы набрали {result} балл(-а, -ов)",
+        "select_type": "Выберете тип",
+        "select_section": "Выберете категорию",
+        "select_lang": "Выберете язык"
     },
     "modules": {
         "manage": "Управление"

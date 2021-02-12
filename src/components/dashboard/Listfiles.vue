@@ -116,6 +116,7 @@ export default {
     filesService: null,
     created() {
         this.filesService = new FilesService( this.$store );
+        this.filesService.loadFiles();
     },
     mounted() {
         this.initLayoutDataView(window);
@@ -128,7 +129,7 @@ export default {
 <style scoped lang="scss">
 
     ::v-deep(.p-dataview-header){
-            padding: 0.5rem 2rem 0.5rem 2rem;
+        padding: 0.5rem 2rem 0.5rem 2rem;
     }
 
     ::v-deep(.p-panel-content) {
