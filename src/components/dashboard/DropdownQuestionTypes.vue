@@ -17,7 +17,7 @@
 import Dropdown from 'primevue/dropdown';
 
 export default {
-    name: 'DropdownTypes',
+    name: 'DropdownQuestionTypes',
     components: {
         Dropdown
     },
@@ -44,7 +44,7 @@ export default {
     },
     methods: {
         onChangeType: function(data) {
-            this.changeType('type_id', data);
+            this.changeType(data);
         }
     },
     mounted() {}

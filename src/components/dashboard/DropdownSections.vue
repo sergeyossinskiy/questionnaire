@@ -1,6 +1,6 @@
 <template>
 
-    <Dropdown v-model="selected" :options="options" :optionValue="optionsValue">
+    <Dropdown v-model="selected" :options="options" :optionValue="optionsValue" :change="onChangeSection(selected)">
         <template #value="">
             <span>{{ currentPlaceholder || $t('worksheet.select_section') }}</span>
         </template>
@@ -23,7 +23,8 @@ export default {
     },
     props: {
         options: Object,
-        optionsValue: String
+        optionsValue: String,
+        changeSection: Function
     },
     data() {
 		return {
@@ -41,7 +42,11 @@ export default {
             }            
         }
     },
-    methods: {},
+    methods: {
+        onChangeSection: function(data) {
+            this.changeSection('section_id', data);
+        }
+    },
     mounted() {}
 }
 </script>

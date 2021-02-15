@@ -5,7 +5,7 @@
             <span class="p-inputgroup-addon" @click="setLocale(locale)">
                 {{ locale.toUpperCase() }}
             </span>
-            <Textarea :autoResize="true" rows="2" cols="30" :name="'input-' + name + '-' + locale" />
+            <Textarea :autoResize="true" rows="2" cols="30" :name="'input-' + name + '-' + locale" @input="onInputChanges" v-model="value[locale]"/>
         </div>
     </div>
 
@@ -21,11 +21,13 @@ export default {
         Textarea
     },
     props: {
-        name: String
+        name: String,
+        changeDescription: Function
     },
     data() {
 		return {
-            locales: locales
+            locales: locales,
+            value: {}
         }
 	},
     computed: {
@@ -50,7 +52,10 @@ export default {
                 active_input.classList.add('active');
                 active_input.parentNode.classList.add('active');
             }
-        }
+        },
+        onInputChanges: _.debounce(function() {
+            this.changeDescription('description', this.value);
+        },500)
     },
     mounted() {
         this.setInputActiv(this.lang);

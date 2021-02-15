@@ -1,6 +1,6 @@
 <template>
 
-    <Dropdown v-model="selected" :options="options">
+    <Dropdown v-model="selected" :options="options" :change="onChangeLang(selected)">
         <template #value="">
             <span>{{ currentPlaceholder || $t('worksheet.select_lang') }}</span>
         </template>
@@ -22,7 +22,8 @@ export default {
         Dropdown
     },
     props: {
-        options: Object
+        options: Object,
+        changeLang: Function
     },
     data() {
 		return {
@@ -35,11 +36,15 @@ export default {
         },
         currentPlaceholder(){
             if ( this.options && this.selected !== undefined){
-                return this.$t(`common.locales.${selected}`);
+                return this.$t(`common.locales.${this.selected}`);
             }            
         }
     },
-    methods: {},
+    methods: {
+        onChangeLang: function(data) {
+            this.changeLang('lang', data);
+        }
+    },
     mounted() {}
 }
 </script>

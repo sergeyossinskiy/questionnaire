@@ -6,30 +6,32 @@
             <span>{{ $t('common.new_file') }}</span>
         </template>
         
-        <div class="p-grid p-px-3 p-px-md-5">
+        <div class="p-grid p-px-3 p-px-md-5 p-mb-5">
             <div class="p-col-12 p-md-4">
-                <h5>category</h5>
-                <DropdownSections :options="sections" optionValue="id" />
+                <h5>{{ $t('worksheet.category') }}</h5>
+                <DropdownSections :options="sections" optionValue="id" :changeSection="onChangeData" />
             </div>
             <div class="p-col-12 p-md-4">
-                <h5>type</h5>
-                <DropdownTypes :options="types" optionValue="id"/>
+                <h5>{{ $t('worksheet.type') }}</h5>
+                <DropdownTypes :options="types" optionValue="id" :changeType="onChangeData" />
             </div>
             <div class="p-col-12 p-md-4">
-                <h5>language</h5>
-                <DropdownLangs :options="locales" />
+                <h5>{{ $t('common.language') }}</h5>
+                <DropdownLangs :options="locales" :changeLang="onChangeData" />
             </div>
 
             <div class="p-col-12">
-                <h5>title</h5>
-                <InputMultiLang name="title"/>
+                <h5>{{ $t('worksheet.title') }}</h5>
+                <InputMultiLang name="title" :changeTitle="onChangeData" />
             </div>
 
             <div class="p-col-12">
-                <h5>description</h5>
-                <TextareaMultiLang name="description"/>
+                <h5>{{ $t('worksheet.description') }}</h5>
+                <TextareaMultiLang name="description" :changeDescription="onChangeData" />
             </div>
         </div>
+
+        <QuestionsEditor :type="data['type_id']"/>
         
     </Panel>
 
@@ -40,37 +42,31 @@ import { FilesService } from '@/services';
 import { locales } from '@/config/locale.config';
 import Panel from 'primevue/panel';
 import Button from 'primevue/button';
-import Dropdown from 'primevue/dropdown';
 import DropdownTypes from './DropdownTypes';
 import DropdownSections from './DropdownSections';
 import DropdownLangs from './DropdownLangs';
 import InputMultiLang from './InputMultiLang';
 import TextareaMultiLang from './TextareaMultiLang';
+import QuestionsEditor from './QuestionsEditor';
 
 export default {
     name: 'Newfile',
     components: {
         Panel,
         Button,
-        Dropdown,
         DropdownTypes,
         DropdownSections,
         DropdownLangs,
         InputMultiLang,
-        TextareaMultiLang
+        TextareaMultiLang,
+        QuestionsEditor
     },
     data() {
 		return {
             worksheet: null,
             selectedCity: null,
             locales: locales,
-            cities: [
-                {name: 'New York', code: 'NY'},
-                {name: 'Rome', code: 'RM'},
-                {name: 'London', code: 'LDN'},
-                {name: 'Istanbul', code: 'IST'},
-                {name: 'Paris', code: 'PRS'}
-            ]
+            data: {}
         }
 	},
     computed: {
@@ -87,6 +83,11 @@ export default {
     methods: {
         toList() {
             this.$store.commit('setOperation', 'listfiles');
+        },
+        onChangeData(name, data) {
+            if (name && data){
+                this.data[name] = data;
+            }                
         }
     },
     filesService: null,

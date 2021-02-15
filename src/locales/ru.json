@@ -39,7 +39,13 @@
         "your_saved_result": "Вы набрали {result} балл(-а, -ов)",
         "select_type": "Выберете тип",
         "select_section": "Выберете категорию",
-        "select_lang": "Выберете язык"
+        "select_lang": "Выберете язык",
+        "questions": "Вопросы",
+        "question": "Вопрос",
+        "category": "Категория",
+        "type": "Тип",
+        "title": "Название",
+        "variants": "Варианты ответа"
     },
     "modules": {
         "manage": "Управление"

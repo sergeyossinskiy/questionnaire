@@ -45,4 +45,21 @@ export class FilesService {
 
         return null;
     }
+
+    getQuestionTypes() {
+        if ( this.$store.getters.dependences )
+            return this.$store.getters.dependences.question_types;
+
+        return null;
+    }
+
+    filterQuestionType(q_types, file_type) {
+        let file_type_name = this.$store.getters.dependences.types.find( x => x.id == file_type);
+        if (file_type_name == "test" || file_type_name == undefined) {
+            return q_types.filter((res) => {
+                        return res.category == 'Closed';
+                    })
+        }
+        return q_types;
+    }
 }  

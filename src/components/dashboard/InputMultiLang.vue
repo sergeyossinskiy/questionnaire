@@ -5,13 +5,14 @@
             <span class="p-inputgroup-addon" @click="setLocale(locale)">
                 {{ locale.toUpperCase() }}
             </span>
-            <InputText placeholder="Username" :name="'input-' + name + '-' + locale"/>
+            <InputText placeholder="Username" :name="'input-' + name + '-' + locale"  @input="onInputChanges" v-model="value[locale]"/>
         </div>
     </div>
 
 </template>
 
 <script>
+import _ from 'lodash';
 import InputText from 'primevue/inputtext';
 import { locales } from '@/config/locale.config';
 
@@ -21,11 +22,13 @@ export default {
         InputText
     },
     props: {
-        name: String
+        name: String,
+        changeTitle: Function
     },
     data() {
 		return {
-            locales: locales
+            locales: locales,
+            value: {}
         }
 	},
     computed: {
@@ -50,7 +53,10 @@ export default {
                 active_input.classList.add('active');
                 active_input.parentNode.classList.add('active');
             }
-        }
+        },
+        onInputChanges: _.debounce(function() {
+            this.changeTitle('title', this.value);
+        },500)
     },
     mounted() {
         this.setInputActiv(this.lang);

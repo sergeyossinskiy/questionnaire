@@ -39,7 +39,13 @@
         "your_saved_result": "Сіз {result} ұпай жинадыңыз",
         "select_type": "Түрін таңдаңыз",
         "select_section": "Санатты таңдаңыз",
-        "select_lang": "Тілді таңдаңыз"
+        "select_lang": "Тілді таңдаңыз",
+        "questions": "Сұрақтар",
+        "question": "Сұрақ",
+        "category": "Санат",
+        "type": "Түр",
+        "title": "Аты-жөні",
+        "variants": "Жауап нұсқалары"
     },
     "modules": {
         "manage": "Бақылау"

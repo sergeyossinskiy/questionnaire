@@ -39,7 +39,13 @@
         "your_saved_result": "You scored {result} points",
         "select_type": "Choose type",
         "select_section": "Choose a category",
-        "select_lang": "Select language"
+        "select_lang": "Select language",
+        "questions": "Questions",
+        "question": "Question",
+        "category": "Category",
+        "type": "Type",
+        "title": "Title",
+        "variants": "Answer options"
     },
     "modules": {
         "manage": "Control"
