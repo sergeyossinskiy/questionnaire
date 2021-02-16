@@ -26,6 +26,9 @@ export default{
         async fetchDependences({dispatch, commit}) {
             const dependences = await means.getWorksheetDependences();
             commit('setDependences', dependences);
+        },
+        async saveWorksheet({dispatch, commit}, data) {
+            console.log( await means.saveWorksheet(data) );
         }
     },
     getters: {

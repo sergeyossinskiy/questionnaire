@@ -1,4 +1,5 @@
 <template>
+    <Toast />
     <div class="p-grid app-layout">
         <div class="p-col-12">
             <Menunav/>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import Toast from 'primevue/toast';
 import Menunav from "@/components/dashboard/Menunav.vue";
 import ProgressSpinner from 'primevue/progressspinner';
 
@@ -27,7 +29,8 @@ export default {
     },
     components: {
         Menunav,
-        ProgressSpinner
+        ProgressSpinner,
+        Toast
     }
 }
 </script>

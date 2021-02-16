@@ -18,6 +18,8 @@
         "new_file": "New file",
         "create": "Create",
         "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
         "errors": {
             "404_descript": "The resource can not be found"
         }
@@ -45,7 +47,23 @@
         "category": "Category",
         "type": "Type",
         "title": "Title",
-        "variants": "Answer options"
+        "variants": "Answer options",
+        "variant": "Option",
+        "correct": "Right",
+        "enter_required_data": "Enter the required data",
+        "result_type": "Result display type",
+        "enter_section": "Please enter a category",
+        "enter_type": "Please enter a type",
+        "enter_lang": "Enter your language",
+        "enter_title": "Enter title",
+        "enter_title_kz": "Enter the title in Kazakh",
+        "enter_title_ru": "Enter the title in Russian",
+        "enter_title_en": "Enter title in English",
+        "enter_description": "Enter a description",
+        "enter_description_kz": "Enter a description in Kazakh",
+        "enter_description_ru": "Enter a description in Russian",
+        "enter_description_en": "Enter description in English",
+        "enter_questions": "Add questions"
     },
     "modules": {
         "manage": "Control"

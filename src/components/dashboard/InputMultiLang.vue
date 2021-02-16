@@ -5,7 +5,7 @@
             <span class="p-inputgroup-addon" @click="setLocale(locale)">
                 {{ locale.toUpperCase() }}
             </span>
-            <InputText placeholder="Username" :name="'input-' + name + '-' + locale"  @input="onInputChanges" v-model="value[locale]"/>
+            <InputText :name="'input-' + name + '-' + locale"  @input="onInputChanges" v-model="value[locale]"/>
         </div>
     </div>
 

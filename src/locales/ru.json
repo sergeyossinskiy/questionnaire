@@ -18,6 +18,8 @@
         "new_file": "Новый файл",
         "create": "Создать",
         "edit": "Изменить",
+        "save": "Сохранить",
+        "cancel": "Отменить",
         "errors": {
             "404_descript": "Ресурс не найден"
         }
@@ -45,7 +47,23 @@
         "category": "Категория",
         "type": "Тип",
         "title": "Название",
-        "variants": "Варианты ответа"
+        "variants": "Варианты ответа",
+        "variant": "Вариант",
+        "correct": "Верный",
+        "enter_required_data": "Укажите необходимые данные",
+        "result_type": "Тип отображения результата",
+        "enter_section": "Укажите категорию",
+        "enter_type": "Укажите тип",
+        "enter_lang": "Укажите язык",
+        "enter_title": "Укажите название",
+        "enter_title_kz": "Укажите название на казахском",
+        "enter_title_ru": "Укажите название на русском",
+        "enter_title_en": "Укажите название на английском",
+        "enter_description": "Укажите описание",
+        "enter_description_kz": "Укажите описание на казахском",
+        "enter_description_ru": "Укажите описание на русском",
+        "enter_description_en": "Укажите описание на английском",
+        "enter_questions": "Добавьте вопросы"
     },
     "modules": {
         "manage": "Управление"

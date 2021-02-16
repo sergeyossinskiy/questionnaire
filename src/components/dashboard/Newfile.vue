@@ -1,6 +1,7 @@
 <template>
 
     <Panel>
+        
         <template #header>
             <Button icon="pi pi-angle-left" class="p-button-raised" @click="toList"/>
             <span>{{ $t('common.new_file') }}</span>
@@ -8,30 +9,41 @@
         
         <div class="p-grid p-px-3 p-px-md-5 p-mb-5">
             <div class="p-col-12 p-md-4">
-                <h5>{{ $t('worksheet.category') }}</h5>
+                <h4>{{ $t('worksheet.category') }}</h4>
                 <DropdownSections :options="sections" optionValue="id" :changeSection="onChangeData" />
             </div>
             <div class="p-col-12 p-md-4">
-                <h5>{{ $t('worksheet.type') }}</h5>
+                <h4>{{ $t('worksheet.type') }}</h4>
                 <DropdownTypes :options="types" optionValue="id" :changeType="onChangeData" />
             </div>
             <div class="p-col-12 p-md-4">
-                <h5>{{ $t('common.language') }}</h5>
+                <h4>{{ $t('common.language') }}</h4>
                 <DropdownLangs :options="locales" :changeLang="onChangeData" />
             </div>
 
             <div class="p-col-12">
-                <h5>{{ $t('worksheet.title') }}</h5>
+                <h4>{{ $t('worksheet.title') }}</h4>
                 <InputMultiLang name="title" :changeTitle="onChangeData" />
             </div>
 
             <div class="p-col-12">
-                <h5>{{ $t('worksheet.description') }}</h5>
+                <h4>{{ $t('worksheet.description') }}</h4>
                 <TextareaMultiLang name="description" :changeDescription="onChangeData" />
             </div>
-        </div>
 
-        <QuestionsEditor :type="data['type_id']"/>
+            <div class="p-col-12">
+               <QuestionsEditor :type="data['type_id']" :questions="data.questions" :questionsEdit="onQuestionsEdit" :questionDelete="onQuestionDelete"/>
+            </div>
+
+            <div v-if="resultTypesVisible" class="p-col-12">
+                <h4>{{ $t('worksheet.result_type') }}</h4>
+               <DropdownResultTypes :options="resultTypes" optionValue="id" :changeResultType="onChangeData" />
+            </div>
+
+            <div class="p-col-12 align-right">
+                <Button :label="$t('common.save')" @click="saveWorksheet"/>
+            </div>
+        </div> 
         
     </Panel>
 
@@ -48,6 +60,7 @@ import DropdownLangs from './DropdownLangs';
 import InputMultiLang from './InputMultiLang';
 import TextareaMultiLang from './TextareaMultiLang';
 import QuestionsEditor from './QuestionsEditor';
+import DropdownResultTypes from './DropdownResultTypes';
 
 export default {
     name: 'Newfile',
@@ -59,14 +72,18 @@ export default {
         DropdownLangs,
         InputMultiLang,
         TextareaMultiLang,
-        QuestionsEditor
+        QuestionsEditor,
+        DropdownResultTypes
     },
     data() {
 		return {
             worksheet: null,
             selectedCity: null,
+            resultTypesVisible: false,
             locales: locales,
-            data: {}
+            data: {
+                "questions": []
+            }
         }
 	},
     computed: {
@@ -78,6 +95,9 @@ export default {
         },
         sections() {
             return this.filesService.getSections();
+        },
+        resultTypes() {
+            return this.filesService.getResultTypes();
         }
     },
     methods: {
@@ -87,7 +107,42 @@ export default {
         onChangeData(name, data) {
             if (name && data){
                 this.data[name] = data;
-            }                
+            }
+            if (name == 'type_id') this.setResultTypesVisible();
+        },
+        onQuestionsEdit(data) {
+            if (this.data['questions']){
+                this.data['questions'].push(data);
+            }
+            else {
+                this.data['questions'] = [];
+                this.data['questions'].push(data);
+            }
+        },
+        onQuestionDelete(data) {
+            if (this.data['questions']){
+                this.data['questions'] = this.data['questions'].filter(val => val !== data);
+            }
+        },
+        saveWorksheet() {
+            if ( this.filesService.validation(this) ) {
+                this.filesService.save(this.data);
+            }
+        },
+        setResultTypesVisible() {
+            if (this.data['type_id']) {
+                let type = this.types.find(t => t.id == this.data['type_id'])
+                let type_name = type ? type.name : undefined;
+
+                if (type_name == "test"){
+                    this.resultTypesVisible = true;
+                }else{
+                    this.resultTypesVisible = false;
+                }              
+            }
+            else {
+                this.resultTypesVisible = false;
+            }
         }
     },
     filesService: null,
@@ -111,12 +166,17 @@ export default {
         border: none;
     }
 
-    h5 {
-        margin-top: 0;
+    h4 {
+        margin-top: 0.4rem;
+        margin-bottom: 0.4rem;
     }
 
     .p-dropdown {
         width: 100%;
+    }
+
+    .align-right {
+        text-align: right;
     }
 
 </style>
