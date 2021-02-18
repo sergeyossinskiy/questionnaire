@@ -63,7 +63,9 @@
         "enter_description_kz": "Укажите описание на казахском",
         "enter_description_ru": "Укажите описание на русском",
         "enter_description_en": "Укажите описание на английском",
-        "enter_questions": "Добавьте вопросы"
+        "enter_questions": "Добавьте вопросы",
+        "requirements": "Требования",
+        "select_requirements": "Выберете требования"
     },
     "modules": {
         "manage": "Управление"

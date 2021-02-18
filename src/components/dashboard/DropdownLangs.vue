@@ -23,13 +23,19 @@ export default {
     },
     props: {
         options: Object,
-        changeLang: Function
+        changeLang: Function,
+        value: Object
     },
     data() {
 		return {
             selected: undefined
         }
 	},
+    watch: {
+        value: function (newdata, olddata) {
+            this.selected = newdata.lang;
+        }
+    },
     computed: {
         lang() {
             return this.$store.getters.lang || this.$i18n.locale;

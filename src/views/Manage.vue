@@ -6,14 +6,15 @@
 
 <script>
 import Panel from 'primevue/panel';
-import { Listfiles, Newfile } from '../components/dashboard';
+import { Listfiles, Newfile, Editfile } from '../components/dashboard';
 
 export default {
     name: "Manage",
     components: {
         Panel,
         Listfiles,
-        Newfile
+        Newfile,
+        Editfile
     },
     data() {
         return {}

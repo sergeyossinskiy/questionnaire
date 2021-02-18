@@ -24,11 +24,12 @@ export default {
     props: {
         options: Object,
         optionsValue: String,
-        changeType: Function
+        changeType: Function,
+        selected: Number
     },
     data() {
 		return {
-            selected: undefined
+            //selected: undefined
         }
 	},
     computed: {
@@ -37,7 +38,8 @@ export default {
         },
         currentPlaceholder(){
             if ( this.options && this.selected !== undefined){
-                let title = this.options.find((x) => {return x.id == this.selected;}).title;
+                let option = this.options.find((x) => {return x.id == this.selected;});
+                let title = option ? option.title : undefined;
                 return this.$filters.translate(title, this.lang);
             }            
         }

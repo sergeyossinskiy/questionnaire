@@ -6,7 +6,7 @@
             <Button icon="pi pi-plus" class="p-button-success" @click="add"/>
         </template>
        
-        <DataTable :value="variants" editMode="row" dataKey="id" v-model:editingRows="editingRows" @row-edit-init="onRowEditInit" @row-edit-save="onRowEditSave">
+        <DataTable :value="vars" editMode="row" dataKey="id" v-model:editingRows="editingRows" @row-edit-init="onRowEditInit" @row-edit-save="onRowEditSave">
             <Column field="variant" :header="$t('worksheet.variant')">
                 <template #editor="slotProps">
                     <InputText v-model="slotProps.data[slotProps.column.props.field]" />
@@ -61,10 +61,10 @@ export default {
     },
     data() {
 		return {
-            variants: [],
             editingCellRows: {},
             editingRows: [],
-            correctOne: true
+            correctOne: true,
+            variants: []
         }
 	},
     originalRows: null,
@@ -76,16 +76,23 @@ export default {
             return this.filesService.getQuestionTypes();
         },
         countCorrect() {
-            return this.variants.filter(x => x.correct == true).length;
+            return this.vars.filter(x => x.correct == true).length;
+        },
+        vars() {
+            return this.$store.getters.variants;
         }
     },
     methods: {
         add() {
-            this.variants.push({
-                "id": this.variants.length+1,
+            let vars = this.$store.getters.variants;
+
+            vars.push({
+                "id": '_' + vars.length+1,
                 "variant": "", 
                 "correct": false
             });
+
+            this.$store.commit('setEditVariants', vars);
         },
         correctChange(e) {
             // e.currentTarget.checked = false;
@@ -96,21 +103,22 @@ export default {
             if (!this.moreOneAnswer) {
                 this.correctOne = this.countCorrect < 1;
 
-                if (this.variants.length == 1) this.correctOne = true;
+                if (this.vars.length == 1) this.correctOne = true;
             }
             else{
                 this.correctOne = this.moreOneAnswer;     
             }            
         },
         onRowEditSave(event) {
-            this.editVariants(this.variants);
+            this.editVariants(this.$store.getters.variants);
         },
         deleteRow(data) {
-            this.variants = this.variants.filter(val => val.id !== data.id);
-            this.editVariants(this.variants);
+            const filtered = this.$store.getters.variants.filter(val => val.id !== data.id);
+            this.$store.commit('setEditVariants', filtered);
+            this.editVariants(filtered);
         },
         onInputChanges: _.debounce(function() {
-            console.log(this.question);
+            //console.log(this.question);
         },500)
     },
     filesService: null,

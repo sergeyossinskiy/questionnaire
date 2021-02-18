@@ -9,12 +9,13 @@
                 {{ slotProps.data[slotProps.column.props.field] }}
             </template>
         </Column>
-        <Column headerStyle="width:4rem" bodyStyle="text-align:left">
+        <Column headerStyle="width:7rem;text-align: right;" bodyStyle="text-align:right">
             <template #header>            
                 <Button icon="pi pi-plus" class="p-button-success" @click="openNewQuestion"/>
             </template>
             <template #body="slotProps">
-                <Button icon="pi pi-trash" class="p-button-rounded p-button-secondary p-button-text" @click="deleteRow(slotProps.data)" />
+                <Button icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-1" @click="editRow(slotProps.data)" />
+                <Button icon="pi pi-trash" class="p-button-rounded p-button-secondary" @click="deleteRow(slotProps.data)" />
             </template>
         </Column>
     </DataTable>
@@ -25,7 +26,7 @@
         </template>
 
         <h5>{{ $t('worksheet.type') }}</h5>
-        <DropdownQuestionTypes :options="questionTypes" optionValue="id" :changeType="onChangeType"/>
+        <DropdownQuestionTypes :selected="question_type_id" :options="questionTypes" optionValue="id" :changeType="onChangeType"/>
 
         <h5>{{ $t('worksheet.question') }}</h5>
         <InputText name="'question" @input="onInputChanges" v-model="question"/>
@@ -76,9 +77,11 @@ export default {
     data() {
 		return {
             questionModalDisplay: false,
+            question_id: undefined,
             question: undefined,
             question_type: undefined,
-            variants: undefined,
+            variants: [],
+            question_type_id: undefined
         }
 	},
     computed: {
@@ -99,21 +102,42 @@ export default {
     },
     methods: {
         openNewQuestion() {
+            this.$store.commit('setEditVariants', []);
+
+            this.question_id = undefined;
+            this.question = undefined;
+            this.question_type = undefined;
+            this.question_type_id = undefined;
+
             this.questionModalDisplay = true;
         },
         closeNewQuestion() {
             this.questionModalDisplay = false;
+            this.$store.commit('setEditVariants', []);            
 
-            this.question = undefined;
-            this.question_type = undefined;
-            this.variants = undefined;
+            // this.question_id = undefined;
+            // this.question = undefined;
+            // this.question_type = undefined;            
         },
         deleteRow(data) {
             this.questionDelete(data);
         },
+        editRow(data) {
+            console.log(data);
+            this.$store.commit('setEditVariants', data.variants);
+
+            this.question_id = data.id;
+            this.question = data.question;
+            this.question_type = data;
+            this.question_type_id = data.type_id;
+            this.variants = data.variants;
+
+            this.questionModalDisplay = true;
+        },
         saveNewQuestion() {
             if (this.question && this.question_type) {
                 this.questionsEdit({
+                    "id": this.question_id || '_' + (this.questions.length+1),
                     "question": this.question,
                     "type_id": this.question_type.id,
                     "variants": this.variants
@@ -130,7 +154,7 @@ export default {
             }
         },
         onInputChanges: _.debounce(function() {
-            console.log(this.question);
+            //console.log(this.question);
         },500),
         onChangeType(data) {
             this.question_type = this.questionTypes.find(x => x.id == data);

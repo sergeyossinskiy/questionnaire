@@ -27,8 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <Button >{{ $t('common.edit') }}</Button>
-                    <!-- @click="openWorksheet(slotProps.data)" -->
+                    <Button @click="openWorksheet(slotProps.data.id)">{{ $t('common.edit') }}</Button>
                 </div>
             </div>
         </template>
@@ -41,30 +40,11 @@
                         <i class="secondary-text"> {{ $t(`common.updated`) }}: 
                         {{ $filters.date( slotProps.data.updated_at ) }} </i>
                     </div>
-                    <Button >{{ $t('common.edit') }}</Button>
-                    <!-- @click="openWorksheet(slotProps.data) -->
+                    <Button @click="openWorksheet(slotProps.data.id)">{{ $t('common.edit') }}</Button>
                 </Panel>
             </div>
         </template>
-    </DataView>
-    <!-- <Panel>
-        <template #header>
-
-            {{ $t('common.files_list') }}
-            <Dropdown v-model="selectedSection" :options="sections" optionLabel="title" optionValue="name">
-                <template #value="">
-                    <span>{{ currentSectionPlaceholder || $t('section.select_category') }}</span>
-                </template>
-                <template #option="slotProps">
-                    <span>{{ $filters.translate( slotProps.option.title, lang )  }}</span>
-                </template>
-            </Dropdown> 
-
-        </template>
-        Manage
-    </Panel> -->
-
-   
+    </DataView>   
 
 </template>
 
@@ -96,7 +76,6 @@ export default {
             return this.$store.getters.lang || this.$i18n.locale;
         },
         files() {
-            console.log(this.filesService.getAll());
             return this.filesService.getAll();
         }
     },
@@ -111,6 +90,10 @@ export default {
         },
         _initLayoutDataView(e) {
             this.initLayoutDataView(e.currentTarget);
+        },
+        openWorksheet(id) {
+            this.$store.commit('setOperationParams', { "worksheet_id": id });
+            this.$store.commit('setOperation', 'editfile');
         }
     },
     filesService: null,

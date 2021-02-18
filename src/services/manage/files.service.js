@@ -62,6 +62,13 @@ export class FilesService {
         return null;
     }
 
+    getRequirements() {
+        if ( this.$store.getters.dependences )
+            return this.$store.getters.dependences.requirements;
+
+        return null;
+    }
+
     filterQuestionType(q_types, file_type) {
         let _file_type = this.$store.getters.dependences.types.find( x => x.id == file_type);
         let file_type_name = (_file_type !== undefined) ? _file_type.name : undefined;
@@ -75,23 +82,35 @@ export class FilesService {
 
     validation($this) {
         let messages = [];
-        if ( $this.data['section_id'] == undefined) messages.push($this.$t('worksheet.enter_section'));
-        if ( $this.data['type_id'] == undefined) messages.push($this.$t('worksheet.enter_type'));
-        if ( $this.data['lang'] == undefined) messages.push($this.$t('worksheet.enter_lang'));
+        let data = this.$store.getters.edited[$this.worksheet_id];
+        
+        if (!data) data = $this.data;
+
+        if ( data['section_id'] == undefined) messages.push($this.$t('worksheet.enter_section'));
+        if ( data['type_id'] == undefined) messages.push($this.$t('worksheet.enter_type'));
+        if ( data['lang'] == undefined) messages.push($this.$t('worksheet.enter_lang'));
         //title
-        if ( $this.data['title'] == undefined) {
+        if ( data['title'] == undefined) {
             messages.push($this.$t('worksheet.enter_title'));
         }else{
+            let title;
+            if (typeof data.title == 'string') title = JSON.parse(data.title);
+            else title = data.title;
+                
             locales.forEach(l=> {
-                if ($this.data.title[l] == undefined) messages.push($this.$t(`worksheet.enter_title_${l}`));
+                if (title[l] == undefined) messages.push($this.$t(`worksheet.enter_title_${l}`));
             });
         }
         //description
-        if ( $this.data['description'] == undefined) {
+        if ( data['description'] == undefined) {
             messages.push($this.$t('worksheet.enter_description'));
         }else{
+            let description;
+            if (typeof data.description == 'string') description = JSON.parse(data.description);
+            else description = data.description;
+
             locales.forEach(l=> {
-                if ($this.data.description[l] == undefined) messages.push($this.$t(`worksheet.enter_description_${l}`));
+                if (description[l] == undefined) messages.push($this.$t(`worksheet.enter_description_${l}`));
             });
         }
         if ( $this.data.questions.length == 0) messages.push($this.$t('worksheet.enter_questions'));
@@ -103,7 +122,41 @@ export class FilesService {
         return !messages.length;
     }
 
-    save(data) {
-        this.$store.dispatch('saveWorksheet', data);
+    save($this) {
+        try {
+            spinner.spin();
+            this.$store.dispatch('saveWorksheet', $this.data).then(() => {
+                this.$store.commit('clearFiles');
+                $this.toList();
+                spinner.stop();
+            });
+        } catch (error) {
+            spinner.stop();
+            $this.$toast.add({severity:'error', summary: error, life: 3000});
+        }        
+    }
+
+    loadWorksheet(worksheet_id) {
+        if ( !this.$store.getters.edited[worksheet_id] ){
+            spinner.spin();
+
+            this.$store.dispatch('fetchEditable', worksheet_id).then(() => {
+                spinner.stop();
+            });
+        }        
+    }
+
+    edit($this) {
+        try {
+            spinner.spin();
+            this.$store.dispatch('editWorksheet', $this.data).then(() => {
+                this.$store.commit('clearFiles');
+                $this.toList();
+                spinner.stop();
+            });
+        } catch (error) {
+            spinner.stop();
+            $this.$toast.add({severity:'error', summary: error, life: 3000});
+        }        
     }
 }  

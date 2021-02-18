@@ -24,20 +24,28 @@ export default {
     props: {
         options: Object,
         optionsValue: String,
-        changeResultType: Function
+        changeResultType: Function,
+        value: Object
     },
     data() {
 		return {
             selected: undefined
         }
 	},
+    watch: {
+        value: function (newdata, olddata) {
+            console.log(newdata);
+            this.selected = newdata.result_type_id;
+        }
+    },
     computed: {
         lang() {
             return this.$store.getters.lang || this.$i18n.locale;
         },
         currentPlaceholder(){
             if ( this.options && this.selected !== undefined){
-                let title = this.options.find((x) => {return x.id == this.selected;}).title;
+                let option = this.options.find((x) => {return x.id == this.selected;});
+                let title = option ? option.title : undefined;
                 return this.$filters.translate(title, this.lang);
             }            
         }

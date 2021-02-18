@@ -63,7 +63,9 @@
         "enter_description_kz": "Enter a description in Kazakh",
         "enter_description_ru": "Enter a description in Russian",
         "enter_description_en": "Enter description in English",
-        "enter_questions": "Add questions"
+        "enter_questions": "Add questions",
+        "requirements": "Requirements",
+        "select_requirements": "Талаптарды таңдаңыз"
     },
     "modules": {
         "manage": "Control"

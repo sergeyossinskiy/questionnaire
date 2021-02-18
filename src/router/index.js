@@ -39,8 +39,8 @@ const routes = [
     path: '/manage', 
     name: 'Manage', 
     meta: { layout: 'dashboard', guards: ['auth', 'available'] },
-    component: () => import('../views/Manage.vue') 
-  }, 
+    component: () => import('../views/Manage.vue'),
+  },
   { 
     path: '/profile', 
     name: 'Profile', 

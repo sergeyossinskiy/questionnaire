@@ -63,7 +63,9 @@
         "enter_description_kz": "Сипаттаманы қазақ тілінде енгізіңіз",
         "enter_description_ru": "Сипаттаманы орыс тілінде енгізіңіз",
         "enter_description_en": "Сипаттаманы ағылшын тілінде енгізу",
-        "enter_questions": "Сұрақтар қосу"
+        "enter_questions": "Сұрақтар қосу",
+        "requirements": "Талаптар",
+        "select_requirements": "Выберете требования"
     },
     "modules": {
         "manage": "Бақылау"

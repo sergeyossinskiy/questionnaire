@@ -24,13 +24,19 @@ export default {
     props: {
         options: Object,
         optionsValue: String,
-        changeType: Function
+        changeType: Function,
+        value: Object
     },
     data() {
 		return {
             selected: undefined
         }
 	},
+    watch: {
+        value: function (newdata, olddata) {
+            this.selected = newdata.type_id;
+        }
+    },
     computed: {
         lang() {
             return this.$store.getters.lang || this.$i18n.locale;

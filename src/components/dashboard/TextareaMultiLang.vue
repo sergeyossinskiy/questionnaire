@@ -22,7 +22,8 @@ export default {
     },
     props: {
         name: String,
-        changeDescription: Function
+        changeDescription: Function,
+        defValue: Object
     },
     data() {
 		return {
@@ -30,6 +31,11 @@ export default {
             value: {}
         }
 	},
+    watch: {
+        defValue: function (newdata, olddata) {
+            this.value = (typeof newdata[this.name] == 'string') ? JSON.parse( newdata[this.name] ) : newdata[this.name];
+        }
+    },
     computed: {
         lang() {
             return this.$store.getters.lang || this.$i18n.locale;
