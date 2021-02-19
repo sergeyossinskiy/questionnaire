@@ -37,8 +37,8 @@
         "answer": "Жауап",
         "answer_all_questions": "Аяқтау үшін барлық сұрақтарға жауап беру керек",
         "number_of_answers": "Берілген жауаптар",
-        "result": "Нәтиже",
-        "your_saved_result": "Сіз {result} ұпай жинадыңыз",
+        "result": "Нәтиже сақталды",
+        "your_saved_result": "Сіздің нәтижеңіз: {result}",
         "select_type": "Түрін таңдаңыз",
         "select_section": "Санатты таңдаңыз",
         "select_lang": "Тілді таңдаңыз",
@@ -69,5 +69,13 @@
     },
     "modules": {
         "manage": "Бақылау"
-    }    
+    },
+    "marks": {
+        "traditional": {
+            "fine": "Өте жақсы",
+            "good": "Жақсы",
+            "satisfactorily": "Қанағаттанарлық",
+            "unsatisfactory": "Қанағаттанарлықсыз"
+        }
+    } 
 }

@@ -37,8 +37,8 @@
         "answer": "Answer",
         "answer_all_questions": "To complete it is necessary to answer all questions",
         "number_of_answers": "Answers given",
-        "result": "The result",
-        "your_saved_result": "You scored {result} points",
+        "result": "Result saved",
+        "your_saved_result": "Your result: {result}",
         "select_type": "Choose type",
         "select_section": "Choose a category",
         "select_lang": "Select language",
@@ -69,5 +69,13 @@
     },
     "modules": {
         "manage": "Control"
-    }   
+    },
+    "marks": {
+        "traditional": {
+            "fine": "Excellent",
+            "good": "Good",
+            "satisfactorily": "Satisfactory",
+            "unsatisfactory": "Unsatisfactory"
+        }
+    } 
 }

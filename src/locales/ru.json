@@ -37,8 +37,8 @@
         "answer": "Ответ",
         "answer_all_questions": "Чтобы завершить неоходимо ответить на все вопросы",
         "number_of_answers": "Дано ответов",
-        "result": "Результат",
-        "your_saved_result": "Вы набрали {result} балл(-а, -ов)",
+        "result": "Результат сохранён",
+        "your_saved_result": "Ваш результат: {result}",
         "select_type": "Выберете тип",
         "select_section": "Выберете категорию",
         "select_lang": "Выберете язык",
@@ -69,5 +69,13 @@
     },
     "modules": {
         "manage": "Управление"
+    },
+    "marks": {
+        "traditional": {
+            "fine": "Отлично",
+            "good": "Хорошо",
+            "satisfactorily": "Удовлетворительно",
+            "unsatisfactory": "Неудовлетворительно"
+        }
     }
 }

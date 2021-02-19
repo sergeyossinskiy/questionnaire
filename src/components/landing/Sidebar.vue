@@ -77,7 +77,8 @@ export default {
         },
         currentSectionPlaceholder(){
             if (this.sections.length && this.selectedSection !== undefined){
-                let title = this.sections.find((x) => {return x.name == this.selectedSection;}).title;
+                let section = this.sections.find((x) => {return x.name == this.selectedSection;});
+                let title = section ? section.title : undefined;
                 return this.$filters.translate(title, this.lang);
             }            
         }

@@ -19,7 +19,6 @@ export class LettersService {
 
     getResult(result, count_questions) {
         let point = Math.round( 100/count_questions*result );
-        console.log(point);
         let mark = '';
 
         Object.keys(this.pointsMap).forEach((value) => {

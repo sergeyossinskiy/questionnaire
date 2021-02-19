@@ -80,9 +80,8 @@ export default {
             return this.$store.getters.lang || this.$i18n.locale;
         },
         worksheet() {
-            console.log(this.$store.getters.worksheet);
             return this.$store.getters.worksheet;
-        }  
+        }
     },
     methods: {
         loaderSpin(){
@@ -104,7 +103,6 @@ export default {
             if (data.answer.other) anw.push( data.answer.other ); 
             
             this.answers[data.question_id] = anw;
-            console.log( this.answers );
         },
         done() {
             const number_question = Object.keys( this.worksheet.questions ).length;
@@ -120,10 +118,19 @@ export default {
                 this.loaderSpin();
                 this.$store.dispatch('saveAnswers', { worksheet_id: this.worksheet_id, answers: this.answers})
                     .then((resolve) => { 
-                        this.result = resolve.data;
+
+                        if (typeof resolve.data == 'string' || typeof resolve.data == 'number'){
+                            this.resultTypeService.format(
+                                                resolve.data,
+                                                this.worksheet.questions.length,
+                                                this.worksheet.result_type_id
+                            ).then(res => {
+                                this.result = res;
+                            });
+                        }                                                
+
                         this.saved = true;
                         this.loaderStop();
-                        console.log(resolve); 
                     })
                     .catch((error) => { 
                         this.$toast.add({ severity:'error', summary: error.message, life: 2000 });
@@ -142,9 +149,7 @@ export default {
     },
     resultTypeService: null,
     created() {
-        this.resultTypeService = new ResultTypeService(this.$store);
-
-        console.log( this.resultTypeService.format(27, 30, 4) );
+        this.resultTypeService = new ResultTypeService(this);
     },
 };
 </script>
