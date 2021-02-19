@@ -58,13 +58,6 @@ export default {
                             command: () => {
                                 this.$store.commit('setOperation', 'newfile');
                             }
-                        },
-                        {
-                            separator:true
-                        },
-                        {
-                            label:'Export',
-                            icon:'pi pi-fw pi-external-link'
                         }
                     ]
                 }

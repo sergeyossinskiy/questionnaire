@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { ResultTypeService } from '@/services';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Divider from 'primevue/divider';
@@ -79,6 +80,7 @@ export default {
             return this.$store.getters.lang || this.$i18n.locale;
         },
         worksheet() {
+            console.log(this.$store.getters.worksheet);
             return this.$store.getters.worksheet;
         }  
     },
@@ -136,8 +138,14 @@ export default {
 
         if ( !Object.keys(this.$store.getters.worksheet).length ) {
             this.$router.push({ name: '404' });
-        }  
-    }
+        }
+    },
+    resultTypeService: null,
+    created() {
+        this.resultTypeService = new ResultTypeService(this.$store);
+
+        console.log( this.resultTypeService.format(27, 30, 4) );
+    },
 };
 </script>
 

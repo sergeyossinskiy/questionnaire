@@ -84,6 +84,10 @@ export class MeansApi {
         this.addTokenToHeaders();    
         return await this.axios.post(this.api + `/questionnaire/worksheets/edit`, data, this.http_options );
     }
+
+    async getResultTypes(){
+        return (await this.axios.get(this.api + '/questionnaire/result_types' )).data;
+    }
 }  
 
 window.means = new MeansApi(axios);
