@@ -22,7 +22,9 @@
         "cancel": "Отменить",
         "errors": {
             "404_descript": "Ресурс не найден"
-        }
+        },
+        "statistic": "Статистика",
+        "statistics_by_files": "Статистика по файлам"
     },
     "section": {
         "take_test" : "Пройти тест",
@@ -68,7 +70,8 @@
         "select_requirements": "Выберете требования"
     },
     "modules": {
-        "manage": "Управление"
+        "manage": "Управление",
+        "statistic": "Статистика"
     },
     "marks": {
         "traditional": {

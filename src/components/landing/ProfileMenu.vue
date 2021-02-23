@@ -1,6 +1,6 @@
 <template>
     <div class="profile-menu">
-        <Button icon="pi pi-user" class="p-button-raised" @click="toggle"/>
+        <Button icon="pi pi-book" class="p-button-raised" @click="toggle"/>
         <Menu ref="menu" :model="actions" :popup="true" :key="isAuth"/>
     </div>
 </template>

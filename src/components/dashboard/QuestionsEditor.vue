@@ -31,7 +31,7 @@
         <h5>{{ $t('worksheet.question') }}</h5>
         <InputText name="'question" @input="onInputChanges" v-model="question"/>
 
-        <VariantsEditor :moreOneAnswer="moreOneAnswer" :editVariants="onEditVariants"/>
+        <VariantsEditor v-show="varEditorVisible" :moreOneAnswer="moreOneAnswer" :editVariants="onEditVariants"/>
 
         <template #footer>
             <Button :label="$t('common.cancel')" @click="closeNewQuestion" icon="pi pi-times" class="p-button-text"/>
@@ -81,6 +81,7 @@ export default {
             question: undefined,
             question_type: undefined,
             variants: [],
+            varEditorVisible: true,
             question_type_id: undefined
         }
 	},
@@ -158,6 +159,13 @@ export default {
         },500),
         onChangeType(data) {
             this.question_type = this.questionTypes.find(x => x.id == data);
+
+            if ((this.question_type ? this.question_type.name : '') == 'open_without_options'){
+                this.varEditorVisible = false;
+            }
+            else{
+                this.varEditorVisible = true;
+            }
         },
         onEditVariants(data) {
             this.variants = data;

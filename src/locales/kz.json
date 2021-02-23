@@ -22,7 +22,9 @@
         "cancel": "Бас тарту",
         "errors": {
             "404_descript": "Ресурсты табу мүмкін емес"
-        }
+        },
+        "statistic": "Статистика",
+        "statistics_by_files": "Файлдар статистикасы"
     },
     "section": {
         "take_test" : "Тестке қатысыңыз",
@@ -68,7 +70,8 @@
         "select_requirements": "Выберете требования"
     },
     "modules": {
-        "manage": "Бақылау"
+        "manage": "Бақылау",
+        "statistic": "Статистика"
     },
     "marks": {
         "traditional": {

@@ -22,7 +22,9 @@
         "cancel": "Cancel",
         "errors": {
             "404_descript": "The resource can not be found"
-        }
+        },
+        "statistic": "Statistics",
+        "statistics_by_files": "Files statistics"
     },
     "section": {
         "take_test" : "Take the test",
@@ -68,7 +70,8 @@
         "select_requirements": "Талаптарды таңдаңыз"
     },
     "modules": {
-        "manage": "Control"
+        "manage": "Control",
+        "statistic": "Statistics"
     },
     "marks": {
         "traditional": {

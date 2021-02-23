@@ -51,6 +51,11 @@ export class MeansApi {
         return (await this.axios.get(this.api + `/questionnaire/worksheet/${worksheet_id}` )).data;
     }
 
+    async getWorksheetForStat(worksheet_id) {     
+        this.addTokenToHeaders();   
+        return (await this.axios.get(this.api + `/questionnaire/worksheet/stat/${worksheet_id}`, this.http_options)).data;
+    }
+
     async saveAnswers(answers) {
         this.addTokenToHeaders();
         return this.axios.post(this.api + "/questionnaire/answers/save", answers, this.http_options);

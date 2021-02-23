@@ -120,8 +120,7 @@ export default {
             if (name == 'type_id') this.setResultTypesVisible();
         },
         onQuestionsEdit(data) {
-            console.log(this.data['questions']);
-            console.log(data);
+            
             if (this.data['questions']){
                 let exists = this.data['questions'].find(q => q.id == data.id);
 

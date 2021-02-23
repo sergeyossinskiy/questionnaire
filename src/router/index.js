@@ -42,6 +42,18 @@ const routes = [
     component: () => import('../views/Manage.vue'),
   },
   { 
+    path: '/statistic', 
+    name: 'Statistic', 
+    meta: { layout: 'statistic', guards: ['auth', 'available'] },
+    component: () => import('../views/Statistic.vue'),
+  },
+  { 
+    path: '/statistic/:id', 
+    name: 'Statistic:File', 
+    meta: { layout: 'statistic', guards: ['auth', 'available'] },
+    component: () => import('../views/StatisticFile.vue'),
+  },
+  { 
     path: '/profile', 
     name: 'Profile', 
     meta: { layout: 'app', guards: ['auth', 'ava'] }, 
