@@ -93,6 +93,11 @@ export class MeansApi {
     async getResultTypes(){
         return (await this.axios.get(this.api + '/questionnaire/result_types' )).data;
     }
+
+    async getResultsForWorksheet(worksheet_id) {     
+        this.addTokenToHeaders();   
+        return (await this.axios.get(this.api + `/questionnaire/results/${worksheet_id}`, this.http_options)).data;
+    }
 }  
 
 window.means = new MeansApi(axios);
