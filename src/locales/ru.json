@@ -24,7 +24,9 @@
             "404_descript": "Ресурс не найден"
         },
         "statistic": "Статистика",
-        "statistics_by_files": "Статистика по файлам"
+        "statistics_by_files": "Статистика по файлам",
+        "search": "Поиск",
+        "history": "История"
     },
     "section": {
         "take_test" : "Пройти тест",
@@ -80,5 +82,10 @@
             "satisfactorily": "Удовлетворительно",
             "unsatisfactory": "Неудовлетворительно"
         }
+    },
+    "results": {
+        "fullname": "Полное имя",
+        "date": "Дата",
+        "mark": "Оценка"
     }
 }

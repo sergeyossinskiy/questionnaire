@@ -18,9 +18,9 @@ export class WordService {
     constructor() {}
   
     export($this) {
-        let doc = new Document();
+        this.doc = new Document();
             
-        const title = new Paragraph({
+        this.title = new Paragraph({
             alignment: AlignmentType.CENTER,
             children: [
                 new TextRun({
@@ -34,6 +34,105 @@ export class WordService {
             },
         });
 
+        let type = $this.$store.getters.stat_questionnaire.type.name;
+
+        if (type == 'test'){
+            this.exportTest($this);
+        }else{
+            this.exportQuestionnaire($this);
+        }
+    }
+
+    saveDocumentToFile(doc, fileName) {
+        const mimeType = "application/vnd.openxmlformats officedocument.wordprocessingml.document";
+        Packer.toBlob(doc).then((blob) => {
+            const docblob = blob.slice(0, blob.size, mimeType);
+            saveAs(docblob, fileName);
+        });
+    }
+
+    exportTest($this) {
+        let rows = [];
+        let count_r = 0;
+
+        rows.push(
+            new TableRow({
+                children: [
+                    new TableCell({
+                        children: [new Paragraph("№")],
+                        margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) },
+                        borders: {top: {style: BorderStyle.INSET,size: 2}}
+                    }),
+                    new TableCell({
+                        children: [new Paragraph($this.$t('results.fullname'))],
+                        margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) },
+                        borders: {top: {style: BorderStyle.INSET,size: 2}}
+                    }),
+                    new TableCell({
+                        children: [new Paragraph($this.$t('results.date'))],
+                        margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) },
+                        borders: {top: {style: BorderStyle.INSET,size: 2}}
+                    }),
+                    new TableCell({
+                        children: [new Paragraph($this.$t('results.mark'))],
+                        margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) },
+                        borders: {top: {style: BorderStyle.INSET,size: 2}}
+                    }),
+                ],
+            })
+        );
+
+        $this.results.forEach(r => {
+            count_r++;
+            rows.push(
+                new TableRow({
+                    children: [
+                        new TableCell({
+                            children: [new Paragraph(String(count_r))],
+                            margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) }
+                        }),
+                        new TableCell({
+                            children: [new Paragraph(r.user.lastname + ' ' + r.user.firstname + ' ' + r.user.patronymic)],
+                            margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) }
+                        }),
+                        new TableCell({
+                            children: [new Paragraph( r.created_at )],
+                            margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) }
+                        }),
+                        new TableCell({
+                            children: [new Paragraph(
+                                $this.resultTypeService.convert(
+                                    r.result.score,
+                                    $this.$store.getters.stat_questionnaire.questions.length,
+                                    $this.$store.getters.stat_questionnaire.result_type_id,
+                                    $this.$store.getters.results_types,
+                                )
+                            )],
+                            margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) }
+                        }),
+                    ],
+                })
+            );
+
+
+        });
+
+        const table = new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            columnWidths: [8, 42, 30, 20],
+            rows: rows
+        });
+
+        this.doc.addSection({
+            properties: {},
+            children: [ this.title, table ]
+        });
+
+        // To export into a .docx file
+        this.saveDocumentToFile(this.doc, `${$this.$t('common.statistic')} - ${$this.title}.docx`);
+    }
+
+    exportQuestionnaire($this) {
         let rows = [];
         let count_q = 0;
 
@@ -167,21 +266,13 @@ export class WordService {
             rows: rows
         });
 
-        doc.addSection({
+        this.doc.addSection({
             properties: {},
-            children: [ title, table ]
+            children: [ this.title, table ]
         });
 
         // To export into a .docx file
-        this.saveDocumentToFile(doc, `vuedoc.docx`);
-    }
-
-    saveDocumentToFile(doc, fileName) {
-        const mimeType = "application/vnd.openxmlformats officedocument.wordprocessingml.document";
-        Packer.toBlob(doc).then((blob) => {
-            const docblob = blob.slice(0, blob.size, mimeType);
-            saveAs(docblob, fileName);
-        });
+        this.saveDocumentToFile(this.doc, `${$this.$t('common.statistic')} - ${$this.title}.docx`);
     }
 }
   

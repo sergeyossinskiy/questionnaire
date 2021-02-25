@@ -24,7 +24,9 @@
             "404_descript": "The resource can not be found"
         },
         "statistic": "Statistics",
-        "statistics_by_files": "Files statistics"
+        "statistics_by_files": "Files statistics",
+        "search": "Search",
+        "history": "Story"
     },
     "section": {
         "take_test" : "Take the test",
@@ -80,5 +82,10 @@
             "satisfactorily": "Satisfactory",
             "unsatisfactory": "Unsatisfactory"
         }
-    } 
+    },
+    "results": {
+        "fullname": "Full name",
+        "date": "Date",
+        "mark": "mark"
+    }
 }

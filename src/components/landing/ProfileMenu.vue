@@ -47,6 +47,12 @@ export default {
                     command: () => {
                         this.$auth.logout();
 					}
+                },
+                history: {
+                    label: this.$t('common.history'),
+                    command: () => {
+                        this.$router.push({name: 'History'});
+					}
                 }
             };            
 
@@ -74,7 +80,7 @@ export default {
                     });
                 });
 
-                enable_items.push(items.logout);
+                enable_items.push(items.history, items.logout);
             }
             else{
                 enable_items.push(items.login, items.register);

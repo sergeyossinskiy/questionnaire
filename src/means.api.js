@@ -94,9 +94,9 @@ export class MeansApi {
         return (await this.axios.get(this.api + '/questionnaire/result_types' )).data;
     }
 
-    async getResultsForWorksheet(worksheet_id) {     
+    async getResultsForWorksheet(worksheet_id, params) {     
         this.addTokenToHeaders();   
-        return (await this.axios.get(this.api + `/questionnaire/results/${worksheet_id}`, this.http_options)).data;
+        return (await this.axios.post(this.api + `/questionnaire/results/${worksheet_id}`, params ,this.http_options)).data;
     }
 }  
 

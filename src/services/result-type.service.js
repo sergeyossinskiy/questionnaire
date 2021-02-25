@@ -35,4 +35,18 @@ export class ResultTypeService {
 
         return service.getResult(result, count_questions);
     }
+
+    convert(result, count_questions, type_id, types) {
+        if (type_id == undefined || type_id == null) return result;
+
+        let current_type = types.find(t => t.id == type_id);
+        let type_name = current_type ? current_type.name : undefined;
+        
+        if (type_name == undefined) return result;
+
+        
+        let service = new (this.typesMap[ type_name ])(this.$t);
+
+        return service.getResult(result, count_questions);
+    }
 }  

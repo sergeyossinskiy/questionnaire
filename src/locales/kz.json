@@ -24,7 +24,9 @@
             "404_descript": "Ресурсты табу мүмкін емес"
         },
         "statistic": "Статистика",
-        "statistics_by_files": "Файлдар статистикасы"
+        "statistics_by_files": "Файлдар статистикасы",
+        "search": "Іздеу",
+        "history": "Тарихы"
     },
     "section": {
         "take_test" : "Тестке қатысыңыз",
@@ -80,5 +82,10 @@
             "satisfactorily": "Қанағаттанарлық",
             "unsatisfactory": "Қанағаттанарлықсыз"
         }
-    } 
+    },
+    "results": {
+        "fullname": "Толық ат",
+        "date": "Күні",
+        "mark": "Бағалау"
+    }
 }
