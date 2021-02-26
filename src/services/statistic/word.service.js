@@ -101,12 +101,12 @@ export class WordService {
                         }),
                         new TableCell({
                             children: [new Paragraph(
-                                $this.resultTypeService.convert(
-                                    r.result.score,
-                                    $this.$store.getters.stat_questionnaire.questions.length,
-                                    $this.$store.getters.stat_questionnaire.result_type_id,
-                                    $this.$store.getters.results_types,
-                                )
+                                String( $this.resultTypeService.convert(
+                                            r.result.score,
+                                            $this.$store.getters.stat_questionnaire.questions.length,
+                                            $this.$store.getters.stat_questionnaire.result_type_id,
+                                            $this.$store.getters.results_types,
+                                        ) )
                             )],
                             margins: { left: convertInchesToTwip(0.1), right: convertInchesToTwip(0.1) }
                         }),
