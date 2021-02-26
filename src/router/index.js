@@ -20,61 +20,61 @@ const routes = [
   { 
     path: '/login', 
     name: 'Login', 
-    meta: { layout: 'auth', guards: ['noauth'] }, 
+    meta: { title: "Quiz", layout: 'auth', guards: ['noauth'] }, 
     component: () => import('../views/auth/Login.vue') 
   },
   { 
     path: '/section/:name_section',
     name: 'Section',
-    meta: { layout: 'app' }, 
+    meta: { title: "Quiz", layout: 'app' }, 
     component: () => import('../views/Section.vue') 
   },
   { 
     path: '/worksheet/:id_worksheet',
     name: 'Worksheet',
-    meta: { layout: 'worksheet' }, 
+    meta: { title: "Quiz", layout: 'worksheet' }, 
     component: () => import('../views/Worksheet.vue')
   },
   { 
     path: '/manage', 
     name: 'Manage', 
-    meta: { layout: 'dashboard', guards: ['auth', 'available'] },
+    meta: { title: "Quiz", layout: 'dashboard', guards: ['auth', 'available'] },
     component: () => import('../views/Manage.vue'),
   },
   { 
     path: '/statistic', 
     name: 'Statistic', 
-    meta: { layout: 'statistic', guards: ['auth', 'available'] },
+    meta: { title: "Quiz", layout: 'statistic', guards: ['auth', 'available'] },
     component: () => import('../views/Statistic.vue'),
   },
   { 
     path: '/statistic/:id', 
     name: 'Statistic:File', 
-    meta: { layout: 'statistic', guards: ['auth', 'available'] },
+    meta: { title: "Quiz", layout: 'statistic', guards: ['auth', 'available'] },
     component: () => import('../views/StatisticFile.vue'),
   },
   { 
     path: '/history', 
     name: 'History', 
-    meta: { layout: 'app', guards: ['auth'] }, 
+    meta: { title: "Quiz", layout: 'app', guards: ['auth'] }, 
     component: () => import('../views/History.vue')
   },
   { 
     path: '/profile', 
     name: 'Profile', 
-    meta: { layout: 'app', guards: ['auth', 'ava'] }, 
+    meta: { title: "Quiz", layout: 'app', guards: ['auth', 'ava'] }, 
     component: () => import('../views/Profile.vue') 
   }, 
   { 
     path: '/about', 
     name: 'About', 
-    meta: { layout: 'app' }, 
+    meta: { title: "Quiz", layout: 'app' }, 
     component: () => import('../views/About.vue')
   },
   { 
     path: '/:pathMatch(.*)*', 
     name: '404',
-    meta: { layout: 'error' }, 
+    meta: { title: "Quiz", layout: 'error' }, 
     component: () => import('../views/errors/Page404.vue') 
   }
 ]
