@@ -75,6 +75,11 @@ export class MeansApi {
         return (await this.axios.get(this.api + `/questionnaire/worksheets/all`, this.http_options )).data;
     }
 
+    async getWorksheetsWithTrashed() {
+        this.addTokenToHeaders();     
+        return (await this.axios.get(this.api + `/questionnaire/worksheets/all_with_trashed`, this.http_options )).data;
+    }
+
     async getWorksheetDependences() {
         this.addTokenToHeaders();    
         return (await this.axios.get(this.api + `/questionnaire/worksheets/dependences`, this.http_options )).data;
@@ -90,6 +95,11 @@ export class MeansApi {
         return await this.axios.post(this.api + `/questionnaire/worksheets/edit`, data, this.http_options );
     }
 
+    async deleteWorksheet(data) {
+        this.addTokenToHeaders();    
+        return await this.axios.post(this.api + `/questionnaire/worksheets/delete`, data, this.http_options );
+    }
+
     async getResultTypes(){
         return (await this.axios.get(this.api + '/questionnaire/result_types' )).data;
     }
@@ -97,6 +107,11 @@ export class MeansApi {
     async getResultsForWorksheet(worksheet_id, params) {     
         this.addTokenToHeaders();   
         return (await this.axios.post(this.api + `/questionnaire/results/${worksheet_id}`, params ,this.http_options)).data;
+    }
+
+    async getResultsForUser() {     
+        this.addTokenToHeaders();   
+        return (await this.axios.get(this.api + `/questionnaire/results_for_user`, this.http_options)).data;
     }
 }  
 

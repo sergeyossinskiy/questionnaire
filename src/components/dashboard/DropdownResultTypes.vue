@@ -34,7 +34,6 @@ export default {
 	},
     watch: {
         value: function (newdata, olddata) {
-            console.log(newdata);
             this.selected = newdata.result_type_id;
         }
     },

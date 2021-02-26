@@ -19,6 +19,7 @@
         "create": "Create",
         "edit": "Edit",
         "save": "Save",
+        "delete": "Delete",
         "cancel": "Cancel",
         "errors": {
             "404_descript": "The resource can not be found"

@@ -54,6 +54,12 @@ const routes = [
     component: () => import('../views/StatisticFile.vue'),
   },
   { 
+    path: '/history', 
+    name: 'History', 
+    meta: { layout: 'app', guards: ['auth'] }, 
+    component: () => import('../views/History.vue')
+  },
+  { 
     path: '/profile', 
     name: 'Profile', 
     meta: { layout: 'app', guards: ['auth', 'ava'] }, 

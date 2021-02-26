@@ -15,7 +15,7 @@
             <div class="p-col-12">
                 <div class="item-details">
                     <div class="item-info">
-                        <img src="@/assets/ills/test.png" alt="test"/>
+                        <img :src="nameIcon(slotProps.data)" alt="test"/>
                         <div class="p-grid">
                             <div class="p-col-12"><strong>{{ $filters.translate( slotProps.data.title,  lang ) }}</strong></div>
                             <div class="p-col-12">{{ $filters.translate( slotProps.data.description,  lang ) }}</div>
@@ -34,7 +34,7 @@
         <template #grid="slotProps">
             <div style="padding: .5em" class="p-col-12 p-md-3">
                 <Panel :header="$filters.translate( slotProps.data.title,  lang )" style="text-align: center">
-                    <img src="@/assets/ills/test.png" alt="test"/>
+                    <img :src="nameIcon(slotProps.data)" alt="test"/>
                     <div class="item-detail">
                         {{ $filters.translate( slotProps.data.description,  lang )  }} -
                         <i class="secondary-text"> {{ $t(`common.updated`) }}: 
@@ -93,12 +93,18 @@ export default {
         },
         openStat(id) {
             this.$router.push({ path: `/statistic/${id}`});
+        },
+        nameIcon(data){
+            let images = require.context('@/assets/ills/', false, /\.png$/);
+            
+            if (data.deleted_at != null) return images("./delete.png");
+            return images("./test.png");
         }
     },
     filesService: null,
     created() {
         this.filesService = new FilesService( this.$store );
-        this.filesService.loadFiles();
+        this.filesService.loadFilesWithTrashed();
     },
     mounted() {
         this.initLayoutDataView(window);

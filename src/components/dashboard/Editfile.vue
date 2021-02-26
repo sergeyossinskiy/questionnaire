@@ -45,8 +45,15 @@
                <QuestionsEditor :type="defData ? defData['type_id'] : undefined" :questions="data ? data.questions : undefined" :questionsEdit="onQuestionsEdit" :questionDelete="onQuestionDelete"/>
             </div>           
 
-            <div class="p-col-12 align-right">
-                <Button :label="$t('common.save')" @click="saveWorksheet"/>
+            <div class="p-col-12 p-pt-5 p-pb-2">
+                <div class="p-grid">
+                    <div class="p-col-6 align-left">
+                        <Button class="p-button-secondary" :label="$t('common.delete')" @click="deleteWorksheet"/>
+                    </div>
+                    <div class="p-col-6 align-right">
+                        <Button :label="$t('common.save')" @click="saveWorksheet"/>
+                    </div>
+                </div>
             </div>
         </div> 
         
@@ -157,6 +164,9 @@ export default {
                 this.filesService.edit(this);
             }
         },
+        deleteWorksheet() {
+            this.filesService.delete(this);
+        },
         setResultTypesVisible() {
             if (this.data['type_id'] &&  this.types) {
                 let type = this.types.find(t => t.id == this.data['type_id'])
@@ -209,6 +219,10 @@ export default {
 
     .align-right {
         text-align: right;
+    }
+
+    .align-left {
+        text-align: left;
     }
 
 </style>

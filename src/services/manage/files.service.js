@@ -15,6 +15,16 @@ export class FilesService {
             });
         }        
     }
+
+    loadFilesWithTrashed() {
+        if ( !this.$store.getters.files ){
+            spinner.spin();
+
+            this.$store.dispatch('fetchFilesWithTrashed').then(() => {
+                spinner.stop();
+            });
+        }        
+    }
   
     getAll() {   
         return this.$store.getters.files;
@@ -150,6 +160,20 @@ export class FilesService {
         try {
             spinner.spin();
             this.$store.dispatch('editWorksheet', $this.data).then(() => {
+                this.$store.commit('clearFiles');
+                $this.toList();
+                spinner.stop();
+            });
+        } catch (error) {
+            spinner.stop();
+            $this.$toast.add({severity:'error', summary: error, life: 3000});
+        }        
+    }
+
+    delete($this) {
+        try {
+            spinner.spin();
+            this.$store.dispatch('deleteWorksheet', $this.data).then((response) => {
                 this.$store.commit('clearFiles');
                 $this.toList();
                 spinner.stop();

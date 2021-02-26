@@ -38,6 +38,10 @@ export default{
             const worksheets = await means.getWorksheets();
             commit('setFiles', worksheets);
         },
+        async fetchFilesWithTrashed({dispatch, commit}) {
+            const worksheets = await means.getWorksheetsWithTrashed();
+            commit('setFiles', worksheets);
+        },
         async fetchDependences({dispatch, commit}) {
             const dependences = await means.getWorksheetDependences();
             commit('setDependences', dependences);
@@ -50,7 +54,10 @@ export default{
             commit('setEdited', { worksheet_id, worksheet });
         },
         async editWorksheet({dispatch, commit}, data) {
-            console.log( await means.editWorksheet(data) );
+            await means.editWorksheet(data);
+        },
+        async deleteWorksheet({dispatch, commit}, data) {
+            return (await means.deleteWorksheet(data)).data;
         },
     },
     getters: {
