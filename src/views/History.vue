@@ -78,7 +78,8 @@ export default {
         results() {
             if (this.$store.getters.results_for_user) {
                 return this.$store.getters.results_for_user;
-            }            
+            }
+            return [];          
         }
     },
     methods: {

@@ -124,7 +124,6 @@ export default {
             this.questionDelete(data);
         },
         editRow(data) {
-            console.log(data);
             this.$store.commit('setEditVariants', data.variants);
 
             this.question_id = data.id;

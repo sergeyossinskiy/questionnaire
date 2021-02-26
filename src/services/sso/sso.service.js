@@ -27,26 +27,4 @@ export class SSOService {
     redirectToRegister() {
         this.redirect( "/register");
     }
-
-    // logout(token) {
-    //     this.token = token;
-    //     console.log(this.$store);
-    //     // let options = this.httpOption.extend('sso-access-token', token);
-        
-    //     // this.http.get(this.sso_api + "/logout" , options ).subscribe({
-    //     //   next: (value) => {
-    //     //     console.log(value);
-    //     //   }
-    //     // });
-    // }
-
-    // goToLoginPage(){
-    //     this.router.navigate(['/login'], {
-    //         queryParams: this.activeRouteCompactToGET()
-    //     });
-    // }
-
-    // redirectTo(pagename){
-    //     this.router.navigate(['/' + pagename]);
-    // }
 }
